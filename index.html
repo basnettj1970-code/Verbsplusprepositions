@@ -3,176 +3,227 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verbes + Prépositions</title>
+<title>Verbe + infinitif</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: system-ui, -apple-system, sans-serif; background: #f9f9f7; color: #1a1a18; }
-.app { max-width: 680px; margin: 0 auto; padding: 2rem 1rem; }
-.header { margin-bottom: 2rem; }
-.header h1 { font-size: 22px; font-weight: 500; color: #1a1a18; }
-.header p { font-size: 14px; color: #6b6b68; margin-top: 4px; }
-.stats { display: flex; gap: 12px; margin-bottom: 2rem; }
-.stat { flex: 1; background: #f1efe8; border-radius: 8px; padding: 12px 16px; }
-.stat-label { font-size: 12px; color: #6b6b68; margin-bottom: 4px; }
-.stat-value { font-size: 22px; font-weight: 500; color: #1a1a18; }
-.card { background: #fff; border: 0.5px solid rgba(0,0,0,0.15); border-radius: 12px; padding: 2.5rem 2rem; margin-bottom: 1.5rem; text-align: center; }
+.app { max-width: 680px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+.header { background: #1a365d; border-radius: 12px; padding: 1.5rem 2rem 1.25rem; margin-bottom: 1.5rem; }
+.header h1 { color: #fff; font-size: 22px; font-weight: 500; }
+.header p { color: rgba(255,255,255,0.72); font-size: 14px; margin-top: 5px; line-height: 1.5; }
+.stats { display: flex; gap: 12px; margin-bottom: 1.5rem; }
+.stat { flex: 1; border-radius: 8px; padding: 12px 16px; }
+.stat-c { background: #dcfce7; }
+.stat-c .sl { color: #166534; font-size: 12px; margin-bottom: 4px; }
+.stat-c .sv { color: #166534; font-size: 22px; font-weight: 500; }
+.stat-a { background: #dbeafe; }
+.stat-a .sl { color: #1e40af; font-size: 12px; margin-bottom: 4px; }
+.stat-a .sv { color: #1e40af; font-size: 22px; font-weight: 500; }
+.stat-s { background: #fef3c7; }
+.stat-s .sl { color: #92400e; font-size: 12px; margin-bottom: 4px; }
+.stat-s .sv { color: #92400e; font-size: 22px; font-weight: 500; }
+.card { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-top: 3px solid #3b82f6; border-radius: 12px; padding: 2.5rem 2rem; margin-bottom: 1.5rem; text-align: center; }
 .verb-label { font-size: 13px; color: #6b6b68; margin-bottom: 12px; letter-spacing: 0.05em; }
 .verb { font-size: 42px; font-weight: 500; color: #1a1a18; margin-bottom: 8px; }
 .verb-meaning { font-size: 15px; color: #6b6b68; }
 .choices { display: flex; gap: 12px; margin-bottom: 1.5rem; justify-content: center; }
-.choice-btn { flex: 1; max-width: 160px; padding: 14px 20px; border: 0.5px solid rgba(0,0,0,0.3); border-radius: 8px; background: #fff; color: #1a1a18; font-size: 20px; font-weight: 500; cursor: pointer; transition: background 0.15s, transform 0.1s; font-family: inherit; }
-.choice-btn:hover { background: #f1efe8; }
+.choice-btn { flex: 1; max-width: 160px; padding: 14px 20px; border-radius: 8px; font-size: 20px; font-weight: 500; cursor: pointer; transition: background 0.15s, transform 0.1s; font-family: inherit; border: 1.5px solid; }
 .choice-btn:active { transform: scale(0.97); }
-.choice-btn.correct { background: #EAF3DE; border-color: #639922; color: #3B6D11; }
-.choice-btn.incorrect { background: #FCEBEB; border-color: #E24B4A; color: #A32D2D; }
-.choice-btn.reveal { background: #EAF3DE; border-color: #639922; color: #3B6D11; }
-.choice-btn:disabled { cursor: default; }
-.feedback { background: #f1efe8; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; min-height: 80px; }
+.choice-btn:disabled { cursor: default; opacity: 0.85; }
+.btn-a { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
+.btn-a:hover:not(:disabled) { background: #dbeafe; }
+.btn-de { background: #fff1f2; border-color: #f43f5e; color: #be123c; }
+.btn-de:hover:not(:disabled) { background: #ffe4e6; }
+.btn-rien { background: #f0fdf4; border-color: #22c55e; color: #15803d; font-size: 14px; }
+.btn-rien:hover:not(:disabled) { background: #dcfce7; }
+.choice-btn.correct { background: #dcfce7; border-color: #16a34a; color: #166534; }
+.choice-btn.incorrect { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+.choice-btn.reveal { background: #dcfce7; border-color: #16a34a; color: #166534; }
+.feedback { background: #f1efe8; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; min-height: 80px; border-left: 4px solid #ccc; }
+.feedback.fb-correct { border-left-color: #16a34a; }
+.feedback.fb-incorrect { border-left-color: #dc2626; }
 .feedback-result { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
-.feedback-result.correct { color: #3B6D11; }
-.feedback-result.incorrect { color: #A32D2D; }
+.feedback-result.correct { color: #166534; }
+.feedback-result.incorrect { color: #991b1b; }
 .feedback-example { font-size: 15px; color: #1a1a18; line-height: 1.6; }
 .feedback-example em { font-style: italic; color: #6b6b68; font-size: 14px; }
-.next-btn { width: 100%; padding: 14px; border: 0.5px solid rgba(0,0,0,0.3); border-radius: 8px; background: #fff; color: #1a1a18; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; transition: background 0.15s; display: none; }
-.next-btn:hover { background: #f1efe8; }
-.progress { height: 3px; background: rgba(0,0,0,0.1); border-radius: 2px; margin-top: 2rem; }
-.progress-fill { height: 100%; background: #639922; border-radius: 2px; transition: width 0.4s ease; }
+.next-btn { width: 100%; padding: 14px; border: 1.5px solid #3b82f6; border-radius: 8px; background: #eff6ff; color: #1d4ed8; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; transition: background 0.15s; display: none; }
+.next-btn:hover { background: #dbeafe; }
+.progress { height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px; margin-top: 1.5rem; }
+.progress-fill { height: 100%; background: #3b82f6; border-radius: 2px; transition: width 0.4s ease; }
 .highlight { font-weight: 500; }
 </style>
 </head>
 <body>
 <div class="app">
   <div class="header">
-    <h1>Verbes + prépositions</h1>
-    <p>Choose the correct preposition that follows each verb</p>
+    <h1>Verbe + infinitif</h1>
+    <p>Which preposition links each verb to the infinitive that follows?<br>Choose <strong>rien</strong> if no preposition is needed.</p>
   </div>
   <div class="stats">
-    <div class="stat"><div class="stat-label">correct</div><div class="stat-value" id="score">0</div></div>
-    <div class="stat"><div class="stat-label">attempted</div><div class="stat-value" id="attempted">0</div></div>
-    <div class="stat"><div class="stat-label">streak</div><div class="stat-value" id="streak">0</div></div>
+    <div class="stat stat-c"><div class="sl">correct</div><div class="sv" id="score">0</div></div>
+    <div class="stat stat-a"><div class="sl">attempted</div><div class="sv" id="attempted">0</div></div>
+    <div class="stat stat-s"><div class="sl">streak</div><div class="sv" id="streak">0</div></div>
   </div>
   <div class="card">
-    <div class="verb-label">which preposition follows?</div>
+    <div class="verb-label">verb + ___ + infinitive</div>
     <div class="verb" id="verb-display">—</div>
     <div class="verb-meaning" id="verb-meaning">—</div>
   </div>
-  <div class="choices" id="choices">
-    <button class="choice-btn" onclick="answer('à')">à</button>
-    <button class="choice-btn" onclick="answer('de')">de</button>
-    <button class="choice-btn" onclick="answer('rien')" style="font-size:14px;">rien</button>
+  <div class="choices">
+    <button class="choice-btn btn-a" onclick="answer('à')">à</button>
+    <button class="choice-btn btn-de" onclick="answer('de')">de</button>
+    <button class="choice-btn btn-rien" onclick="answer('rien')">rien</button>
   </div>
   <div class="feedback" id="feedback" style="display:none;"></div>
-  <button class="next-btn" id="next-btn" onclick="nextVerb()">Next verb →</button>
+  <button class="next-btn" id="next-btn" onclick="nextVerb()">Verbe suivant →</button>
   <div class="progress"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
 </div>
-
 <script>
 const verbs = [
-  { verb: "aider", prep: "à", meaning: "to help", example: "Elle aide sa sœur <span class='highlight'>à</span> faire ses devoirs.", translation: "She helps her sister to do her homework." },
-  { verb: "apprendre", prep: "à", meaning: "to learn / to teach", example: "Il apprend <span class='highlight'>à</span> conduire.", translation: "He is learning to drive." },
-  { verb: "chercher", prep: "à", meaning: "to try / to seek", example: "Elle cherche <span class='highlight'>à</span> comprendre.", translation: "She is trying to understand." },
-  { verb: "commencer", prep: "à", meaning: "to begin", example: "Il commence <span class='highlight'>à</span> pleuvoir.", translation: "It is starting to rain." },
-  { verb: "continuer", prep: "à", meaning: "to continue", example: "Elle continue <span class='highlight'>à</span> travailler.", translation: "She continues to work." },
-  { verb: "hésiter", prep: "à", meaning: "to hesitate", example: "Il hésite <span class='highlight'>à</span> répondre.", translation: "He hesitates to reply." },
-  { verb: "inviter", prep: "à", meaning: "to invite", example: "Je t'invite <span class='highlight'>à</span> dîner chez moi.", translation: "I'm inviting you to have dinner at my place." },
-  { verb: "penser", prep: "à", meaning: "to think about", example: "Je pense souvent <span class='highlight'>à</span> mes amis.", translation: "I often think about my friends." },
-  { verb: "réussir", prep: "à", meaning: "to succeed in", example: "Il réussit <span class='highlight'>à</span> passer l'examen.", translation: "He succeeds in passing the exam." },
-  { verb: "s'amuser", prep: "à", meaning: "to have fun doing", example: "Elles s'amusent <span class='highlight'>à</span> danser.", translation: "They have fun dancing." },
-  { verb: "se mettre", prep: "à", meaning: "to begin / to start", example: "Il se met <span class='highlight'>à</span> chanter.", translation: "He starts singing." },
-  { verb: "tenir", prep: "à", meaning: "to be keen on", example: "Je tiens <span class='highlight'>à</span> te voir.", translation: "I really want to see you." },
-  { verb: "accuser", prep: "de", meaning: "to accuse of", example: "Il l'accuse <span class='highlight'>de</span> mentir.", translation: "He accuses her of lying." },
-  { verb: "arrêter", prep: "de", meaning: "to stop doing", example: "Arrête <span class='highlight'>de</span> parler!", translation: "Stop talking!" },
-  { verb: "avoir besoin", prep: "de", meaning: "to need", example: "J'ai besoin <span class='highlight'>de</span> dormir.", translation: "I need to sleep." },
-  { verb: "avoir envie", prep: "de", meaning: "to feel like", example: "Elle a envie <span class='highlight'>de</span> voyager.", translation: "She feels like travelling." },
-  { verb: "avoir peur", prep: "de", meaning: "to be afraid of", example: "Il a peur <span class='highlight'>de</span> l'eau.", translation: "He is afraid of water." },
-  { verb: "choisir", prep: "de", meaning: "to choose to", example: "Elle choisit <span class='highlight'>de</span> rester.", translation: "She chooses to stay." },
-  { verb: "décider", prep: "de", meaning: "to decide to", example: "Nous décidons <span class='highlight'>de</span> partir.", translation: "We decide to leave." },
-  { verb: "essayer", prep: "de", meaning: "to try to", example: "J'essaie <span class='highlight'>de</span> comprendre.", translation: "I am trying to understand." },
-  { verb: "finir", prep: "de", meaning: "to finish doing", example: "Il finit <span class='highlight'>de</span> manger.", translation: "He finishes eating." },
-  { verb: "oublier", prep: "de", meaning: "to forget to", example: "J'ai oublié <span class='highlight'>de</span> fermer la porte.", translation: "I forgot to close the door." },
-  { verb: "permettre", prep: "de", meaning: "to allow to", example: "Il me permet <span class='highlight'>de</span> sortir.", translation: "He allows me to go out." },
-  { verb: "promettre", prep: "de", meaning: "to promise to", example: "Elle promet <span class='highlight'>de</span> revenir.", translation: "She promises to come back." },
-  { verb: "refuser", prep: "de", meaning: "to refuse to", example: "Il refuse <span class='highlight'>de</span> manger.", translation: "He refuses to eat." },
-  { verb: "regretter", prep: "de", meaning: "to regret doing", example: "Je regrette <span class='highlight'>de</span> t'avoir dit ça.", translation: "I regret having said that to you." },
-  { verb: "remercier", prep: "de", meaning: "to thank for", example: "Je te remercie <span class='highlight'>de</span> ton aide.", translation: "I thank you for your help." },
-  { verb: "s'arrêter", prep: "de", meaning: "to stop doing", example: "Il s'arrête <span class='highlight'>de</span> courir.", translation: "He stops running." },
-  { verb: "se souvenir", prep: "de", meaning: "to remember", example: "Tu te souviens <span class='highlight'>de</span> ce jour?", translation: "Do you remember that day?" },
-  { verb: "venir", prep: "de", meaning: "to have just (done)", example: "Je viens <span class='highlight'>de</span> manger.", translation: "I have just eaten." },
-  { verb: "aller", prep: "rien", meaning: "to go", example: "Il <span class='highlight'>va</span> au cinéma ce soir.", translation: "He is going to the cinema tonight." },
-  { verb: "aimer", prep: "rien", meaning: "to like / to love", example: "J'<span class='highlight'>aime</span> la musique classique.", translation: "I love classical music." },
-  { verb: "attendre", prep: "rien", meaning: "to wait for", example: "Il <span class='highlight'>attend</span> le bus.", translation: "He is waiting for the bus." },
-  { verb: "devoir", prep: "rien", meaning: "to have to / must", example: "Tu <span class='highlight'>dois</span> travailler.", translation: "You have to work." },
-  { verb: "écouter", prep: "rien", meaning: "to listen to", example: "Elle <span class='highlight'>écoute</span> de la musique.", translation: "She is listening to music." },
-  { verb: "entrer", prep: "rien", meaning: "to enter", example: "Il <span class='highlight'>entre</span> dans la salle.", translation: "He enters the room." },
-  { verb: "espérer", prep: "rien", meaning: "to hope to", example: "Elle <span class='highlight'>espère</span> réussir.", translation: "She hopes to succeed." },
-  { verb: "faire", prep: "rien", meaning: "to do / to make", example: "Elle <span class='highlight'>fait</span> ses devoirs.", translation: "She is doing her homework." },
-  { verb: "laisser", prep: "rien", meaning: "to let / to allow", example: "Il me <span class='highlight'>laisse</span> partir.", translation: "He lets me leave." },
-  { verb: "oser", prep: "rien", meaning: "to dare to", example: "Je n'<span class='highlight'>ose</span> pas lui parler.", translation: "I don't dare talk to him." },
-  { verb: "partir", prep: "rien", meaning: "to leave", example: "Nous <span class='highlight'>partons</span> demain matin.", translation: "We are leaving tomorrow morning." },
-  { verb: "pouvoir", prep: "rien", meaning: "to be able to", example: "Tu <span class='highlight'>peux</span> venir avec moi.", translation: "You can come with me." },
-  { verb: "préférer", prep: "rien", meaning: "to prefer", example: "Il <span class='highlight'>préfère</span> rester à la maison.", translation: "He prefers to stay at home." },
-  { verb: "regarder", prep: "rien", meaning: "to watch / to look at", example: "Il <span class='highlight'>regarde</span> la télé.", translation: "He is watching TV." },
-  { verb: "rentrer", prep: "rien", meaning: "to return home", example: "Elle <span class='highlight'>rentre</span> chez elle.", translation: "She is going home." },
-  { verb: "savoir", prep: "rien", meaning: "to know how to", example: "Elle <span class='highlight'>sait</span> nager.", translation: "She knows how to swim." },
-  { verb: "sembler", prep: "rien", meaning: "to seem to", example: "Il <span class='highlight'>semble</span> fatigué.", translation: "He seems tired." },
-  { verb: "sortir", prep: "rien", meaning: "to go out", example: "Ils <span class='highlight'>sortent</span> ce soir.", translation: "They are going out tonight." },
-  { verb: "vouloir", prep: "rien", meaning: "to want to", example: "Je <span class='highlight'>veux</span> voyager.", translation: "I want to travel." },
-  { verb: "voir", prep: "rien", meaning: "to see", example: "Je <span class='highlight'>vois</span> mes amis ce weekend.", translation: "I'm seeing my friends this weekend." },
+  { verb:"aider", prep:"à", meaning:"to help", example:"Elle aide sa sœur <span class='highlight'>à</span> faire ses devoirs.", translation:"She helps her sister to do her homework." },
+  { verb:"apprendre", prep:"à", meaning:"to learn / to teach", example:"Il apprend <span class='highlight'>à</span> conduire.", translation:"He is learning to drive." },
+  { verb:"chercher", prep:"à", meaning:"to try to", example:"Elle cherche <span class='highlight'>à</span> comprendre.", translation:"She is trying to understand." },
+  { verb:"commencer", prep:"à", meaning:"to begin to", example:"Il commence <span class='highlight'>à</span> pleuvoir.", translation:"It is starting to rain." },
+  { verb:"continuer", prep:"à", meaning:"to continue to", example:"Elle continue <span class='highlight'>à</span> travailler.", translation:"She continues to work." },
+  { verb:"hésiter", prep:"à", meaning:"to hesitate to", example:"Il hésite <span class='highlight'>à</span> répondre.", translation:"He hesitates to reply." },
+  { verb:"inviter", prep:"à", meaning:"to invite to", example:"Je t'invite <span class='highlight'>à</span> entrer.", translation:"I invite you to come in." },
+  { verb:"réussir", prep:"à", meaning:"to succeed in", example:"Il réussit <span class='highlight'>à</span> passer l'examen.", translation:"He succeeds in passing the exam." },
+  { verb:"s'amuser", prep:"à", meaning:"to enjoy doing", example:"Elles s'amusent <span class='highlight'>à</span> danser.", translation:"They enjoy dancing." },
+  { verb:"se mettre", prep:"à", meaning:"to start to", example:"Il se met <span class='highlight'>à</span> chanter.", translation:"He starts singing." },
+  { verb:"tenir", prep:"à", meaning:"to be keen to", example:"Je tiens <span class='highlight'>à</span> te voir.", translation:"I really want to see you." },
+  { verb:"s'habituer", prep:"à", meaning:"to get used to", example:"Elle s'habitue <span class='highlight'>à</span> vivre seule.", translation:"She is getting used to living alone." },
+  { verb:"se préparer", prep:"à", meaning:"to prepare to", example:"Elle se prépare <span class='highlight'>à</span> partir.", translation:"She is preparing to leave." },
+  { verb:"obliger", prep:"à", meaning:"to oblige to", example:"Il m'oblige <span class='highlight'>à</span> travailler.", translation:"He obliges me to work." },
+  { verb:"encourager", prep:"à", meaning:"to encourage to", example:"Elle m'encourage <span class='highlight'>à</span> persévérer.", translation:"She encourages me to persevere." },
+  { verb:"arriver", prep:"à", meaning:"to manage to", example:"J'arrive <span class='highlight'>à</span> le comprendre.", translation:"I manage to understand him." },
+  { verb:"renoncer", prep:"à", meaning:"to give up", example:"Il renonce <span class='highlight'>à</span> partir.", translation:"He gives up on leaving." },
+  { verb:"servir", prep:"à", meaning:"to be used to", example:"Cet outil sert <span class='highlight'>à</span> couper.", translation:"This tool is used for cutting." },
+  { verb:"forcer", prep:"à", meaning:"to force to", example:"Il me force <span class='highlight'>à</span> rester.", translation:"He forces me to stay." },
+  { verb:"s'attendre", prep:"à", meaning:"to expect to", example:"Je m'attendais <span class='highlight'>à</span> le voir.", translation:"I was expecting to see him." },
+  { verb:"consentir", prep:"à", meaning:"to consent to", example:"Il consent <span class='highlight'>à</span> partir.", translation:"He consents to leave." },
+  { verb:"pousser", prep:"à", meaning:"to urge to", example:"Il me pousse <span class='highlight'>à</span> agir.", translation:"He urges me to act." },
+  { verb:"se décider", prep:"à", meaning:"to make up one's mind to", example:"Elle se décide <span class='highlight'>à</span> partir.", translation:"She makes up her mind to leave." },
+  { verb:"condamner", prep:"à", meaning:"to condemn to", example:"Il est condamné <span class='highlight'>à</span> payer.", translation:"He is condemned to pay." },
+  { verb:"aspirer", prep:"à", meaning:"to aspire to", example:"Elle aspire <span class='highlight'>à</span> réussir.", translation:"She aspires to succeed." },
+  { verb:"tarder", prep:"à", meaning:"to be slow to", example:"Il tarde <span class='highlight'>à</span> répondre.", translation:"He is slow to reply." },
+  { verb:"parvenir", prep:"à", meaning:"to manage to", example:"Elle parvient <span class='highlight'>à</span> le convaincre.", translation:"She manages to convince him." },
+  { verb:"s'engager", prep:"à", meaning:"to commit to", example:"Il s'engage <span class='highlight'>à</span> travailler dur.", translation:"He commits to working hard." },
+  { verb:"se plaire", prep:"à", meaning:"to enjoy doing", example:"Il se plaît <span class='highlight'>à</span> lire.", translation:"He enjoys reading." },
+  { verb:"avoir du mal", prep:"à", meaning:"to find it hard to", example:"J'ai du mal <span class='highlight'>à</span> comprendre.", translation:"I find it hard to understand." },
+  { verb:"s'acharner", prep:"à", meaning:"to persist in", example:"Il s'acharne <span class='highlight'>à</span> comprendre.", translation:"He persists in trying to understand." },
+  { verb:"se résoudre", prep:"à", meaning:"to resolve to", example:"Il se résout <span class='highlight'>à</span> partir.", translation:"He resolves to leave." },
+  { verb:"se borner", prep:"à", meaning:"to limit oneself to", example:"Elle se borne <span class='highlight'>à</span> observer.", translation:"She limits herself to observing." },
+  { verb:"se consacrer", prep:"à", meaning:"to devote oneself to", example:"Il se consacre <span class='highlight'>à</span> écrire.", translation:"He devotes himself to writing." },
+  { verb:"accuser", prep:"de", meaning:"to accuse of", example:"Il l'accuse <span class='highlight'>de</span> mentir.", translation:"He accuses her of lying." },
+  { verb:"arrêter", prep:"de", meaning:"to stop doing", example:"Arrête <span class='highlight'>de</span> parler!", translation:"Stop talking!" },
+  { verb:"avoir besoin", prep:"de", meaning:"to need to", example:"J'ai besoin <span class='highlight'>de</span> dormir.", translation:"I need to sleep." },
+  { verb:"avoir envie", prep:"de", meaning:"to feel like doing", example:"Elle a envie <span class='highlight'>de</span> voyager.", translation:"She feels like travelling." },
+  { verb:"avoir peur", prep:"de", meaning:"to be afraid of doing", example:"Il a peur <span class='highlight'>de</span> tomber.", translation:"He is afraid of falling." },
+  { verb:"choisir", prep:"de", meaning:"to choose to", example:"Elle choisit <span class='highlight'>de</span> rester.", translation:"She chooses to stay." },
+  { verb:"décider", prep:"de", meaning:"to decide to", example:"Nous décidons <span class='highlight'>de</span> partir.", translation:"We decide to leave." },
+  { verb:"essayer", prep:"de", meaning:"to try to", example:"J'essaie <span class='highlight'>de</span> comprendre.", translation:"I am trying to understand." },
+  { verb:"finir", prep:"de", meaning:"to finish doing", example:"Il finit <span class='highlight'>de</span> manger.", translation:"He finishes eating." },
+  { verb:"oublier", prep:"de", meaning:"to forget to", example:"J'ai oublié <span class='highlight'>de</span> fermer la porte.", translation:"I forgot to close the door." },
+  { verb:"permettre", prep:"de", meaning:"to allow to", example:"Il me permet <span class='highlight'>de</span> sortir.", translation:"He allows me to go out." },
+  { verb:"promettre", prep:"de", meaning:"to promise to", example:"Elle promet <span class='highlight'>de</span> revenir.", translation:"She promises to come back." },
+  { verb:"refuser", prep:"de", meaning:"to refuse to", example:"Il refuse <span class='highlight'>de</span> manger.", translation:"He refuses to eat." },
+  { verb:"regretter", prep:"de", meaning:"to regret doing", example:"Je regrette <span class='highlight'>de</span> t'avoir dit ça.", translation:"I regret having said that to you." },
+  { verb:"remercier", prep:"de", meaning:"to thank for doing", example:"Je te remercie <span class='highlight'>de</span> m'avoir aidé.", translation:"I thank you for having helped me." },
+  { verb:"s'arrêter", prep:"de", meaning:"to stop doing", example:"Il s'arrête <span class='highlight'>de</span> courir.", translation:"He stops running." },
+  { verb:"se souvenir", prep:"de", meaning:"to remember doing", example:"Je me souviens <span class='highlight'>de</span> l'avoir vu.", translation:"I remember having seen him." },
+  { verb:"venir", prep:"de", meaning:"to have just done", example:"Je viens <span class='highlight'>de</span> manger.", translation:"I have just eaten." },
+  { verb:"cesser", prep:"de", meaning:"to stop doing", example:"Il cesse <span class='highlight'>de</span> pleuvoir.", translation:"It has stopped raining." },
+  { verb:"craindre", prep:"de", meaning:"to fear doing", example:"Elle craint <span class='highlight'>de</span> se tromper.", translation:"She fears making a mistake." },
+  { verb:"se dépêcher", prep:"de", meaning:"to hurry to", example:"Dépêche-toi <span class='highlight'>de</span> finir!", translation:"Hurry up and finish!" },
+  { verb:"empêcher", prep:"de", meaning:"to prevent from doing", example:"Il m'empêche <span class='highlight'>de</span> dormir.", translation:"He is preventing me from sleeping." },
+  { verb:"s'excuser", prep:"de", meaning:"to apologise for doing", example:"Elle s'excuse <span class='highlight'>de</span> m'avoir dérangé.", translation:"She apologises for having disturbed me." },
+  { verb:"mériter", prep:"de", meaning:"to deserve to", example:"Il mérite <span class='highlight'>de</span> réussir.", translation:"He deserves to succeed." },
+  { verb:"se plaindre", prep:"de", meaning:"to complain about doing", example:"Elle se plaint <span class='highlight'>de</span> travailler trop.", translation:"She complains about working too much." },
+  { verb:"profiter", prep:"de", meaning:"to take the opportunity to", example:"Profite <span class='highlight'>de</span> voyager pendant que tu es jeune.", translation:"Take the opportunity to travel while you're young." },
+  { verb:"risquer", prep:"de", meaning:"to risk doing", example:"Tu risques <span class='highlight'>de</span> tomber.", translation:"You risk falling." },
+  { verb:"tâcher", prep:"de", meaning:"to try to", example:"Tâche <span class='highlight'>de</span> ne pas oublier.", translation:"Try not to forget." },
+  { verb:"avoir honte", prep:"de", meaning:"to be ashamed of doing", example:"Il a honte <span class='highlight'>de</span> mentir.", translation:"He is ashamed of lying." },
+  { verb:"avoir l'intention", prep:"de", meaning:"to intend to", example:"J'ai l'intention <span class='highlight'>de</span> voyager.", translation:"I intend to travel." },
+  { verb:"brûler", prep:"de", meaning:"to be dying to", example:"Il brûle <span class='highlight'>de</span> lui parler.", translation:"He is dying to talk to her." },
+  { verb:"manquer", prep:"de", meaning:"to nearly do", example:"Il a manqué <span class='highlight'>de</span> tomber.", translation:"He nearly fell." },
+  { verb:"se charger", prep:"de", meaning:"to take charge of doing", example:"Je me charge <span class='highlight'>de</span> tout organiser.", translation:"I'll take charge of organising everything." },
+  { verb:"aller", prep:"rien", meaning:"to be going to", example:"Il <span class='highlight'>va</span> partir demain.", translation:"He is going to leave tomorrow." },
+  { verb:"aimer", prep:"rien", meaning:"to like doing", example:"J'<span class='highlight'>aime</span> danser.", translation:"I like dancing." },
+  { verb:"adorer", prep:"rien", meaning:"to love doing", example:"Elle <span class='highlight'>adore</span> voyager.", translation:"She loves travelling." },
+  { verb:"détester", prep:"rien", meaning:"to hate doing", example:"Il <span class='highlight'>déteste</span> attendre.", translation:"He hates waiting." },
+  { verb:"devoir", prep:"rien", meaning:"to have to", example:"Tu <span class='highlight'>dois</span> travailler.", translation:"You have to work." },
+  { verb:"espérer", prep:"rien", meaning:"to hope to", example:"Elle <span class='highlight'>espère</span> réussir.", translation:"She hopes to succeed." },
+  { verb:"faire", prep:"rien", meaning:"to make someone do", example:"Elle <span class='highlight'>fait</span> travailler ses élèves.", translation:"She has her pupils work." },
+  { verb:"laisser", prep:"rien", meaning:"to let / to allow", example:"Il me <span class='highlight'>laisse</span> partir.", translation:"He lets me leave." },
+  { verb:"oser", prep:"rien", meaning:"to dare to", example:"Je n'<span class='highlight'>ose</span> pas lui parler.", translation:"I don't dare talk to him." },
+  { verb:"pouvoir", prep:"rien", meaning:"to be able to", example:"Tu <span class='highlight'>peux</span> venir avec moi.", translation:"You can come with me." },
+  { verb:"préférer", prep:"rien", meaning:"to prefer to", example:"Il <span class='highlight'>préfère</span> rester.", translation:"He prefers to stay." },
+  { verb:"savoir", prep:"rien", meaning:"to know how to", example:"Elle <span class='highlight'>sait</span> nager.", translation:"She knows how to swim." },
+  { verb:"sembler", prep:"rien", meaning:"to seem to", example:"Il <span class='highlight'>semble</span> comprendre.", translation:"He seems to understand." },
+  { verb:"vouloir", prep:"rien", meaning:"to want to", example:"Je <span class='highlight'>veux</span> voyager.", translation:"I want to travel." },
+  { verb:"voir", prep:"rien", meaning:"to see someone do", example:"Je le <span class='highlight'>vois</span> travailler.", translation:"I see him working." },
+  { verb:"entendre", prep:"rien", meaning:"to hear someone do", example:"Je l'<span class='highlight'>entends</span> chanter.", translation:"I hear her singing." },
+  { verb:"écouter", prep:"rien", meaning:"to listen to someone do", example:"Je l'<span class='highlight'>écoute</span> parler.", translation:"I listen to her speaking." },
+  { verb:"regarder", prep:"rien", meaning:"to watch someone do", example:"Il la <span class='highlight'>regarde</span> danser.", translation:"He watches her dancing." },
+  { verb:"sentir", prep:"rien", meaning:"to feel / sense someone do", example:"Je le <span class='highlight'>sens</span> bouger.", translation:"I feel it moving." },
+  { verb:"croire", prep:"rien", meaning:"to believe / to think", example:"Je <span class='highlight'>crois</span> comprendre.", translation:"I think I understand." },
+  { verb:"compter", prep:"rien", meaning:"to plan to", example:"Je <span class='highlight'>compte</span> partir demain.", translation:"I plan to leave tomorrow." },
+  { verb:"souhaiter", prep:"rien", meaning:"to wish to", example:"Elle <span class='highlight'>souhaite</span> partir.", translation:"She wishes to leave." },
+  { verb:"prétendre", prep:"rien", meaning:"to claim to", example:"Il <span class='highlight'>prétend</span> tout savoir.", translation:"He claims to know everything." },
+  { verb:"faillir", prep:"rien", meaning:"to nearly do", example:"Il a <span class='highlight'>failli</span> tomber.", translation:"He nearly fell." },
+  { verb:"avouer", prep:"rien", meaning:"to admit to", example:"Il <span class='highlight'>avoue</span> ne pas comprendre.", translation:"He admits he doesn't understand." },
+  { verb:"nier", prep:"rien", meaning:"to deny doing", example:"Il <span class='highlight'>nie</span> avoir menti.", translation:"He denies having lied." },
+  { verb:"reconnaître", prep:"rien", meaning:"to acknowledge doing", example:"Elle <span class='highlight'>reconnaît</span> avoir eu tort.", translation:"She acknowledges having been wrong." },
+  { verb:"affirmer", prep:"rien", meaning:"to claim to", example:"Elle <span class='highlight'>affirme</span> avoir raison.", translation:"She claims to be right." },
+  { verb:"paraître", prep:"rien", meaning:"to appear to", example:"Il <span class='highlight'>paraît</span> comprendre.", translation:"He appears to understand." },
+  { verb:"déclarer", prep:"rien", meaning:"to declare", example:"Elle <span class='highlight'>déclare</span> vouloir partir.", translation:"She declares that she wants to leave." },
+  { verb:"désirer", prep:"rien", meaning:"to desire to", example:"Il <span class='highlight'>désire</span> voyager.", translation:"He wishes to travel." },
+  { verb:"aimer mieux", prep:"rien", meaning:"to prefer to", example:"J'<span class='highlight'>aime mieux</span> rester.", translation:"I'd rather stay." },
 ];
 
-let queue = [], current = null, score = 0, attempted = 0, streak = 0, answered = false;
-
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function refillQueue() { queue = shuffle([...verbs]); }
-
-function nextVerb() {
-  if (queue.length === 0) refillQueue();
-  current = queue.pop();
-  answered = false;
-  document.getElementById('verb-display').textContent = current.verb;
-  document.getElementById('verb-meaning').textContent = current.meaning;
-  document.getElementById('feedback').style.display = 'none';
-  document.getElementById('next-btn').style.display = 'none';
-  document.querySelectorAll('.choice-btn').forEach(b => { b.className = 'choice-btn'; b.disabled = false; });
-  updateProgress();
-}
-
-function answer(choice) {
-  if (answered) return;
-  answered = true;
-  attempted++;
-  const correct = choice === current.prep;
-  if (correct) { score++; streak++; } else { streak = 0; }
-  document.getElementById('score').textContent = score;
-  document.getElementById('attempted').textContent = attempted;
-  document.getElementById('streak').textContent = streak;
-  document.querySelectorAll('.choice-btn').forEach(b => {
-    b.disabled = true;
-    const val = b.textContent.trim();
-    if (val === current.prep || (val === 'rien' && current.prep === 'rien')) b.classList.add('reveal');
-    if (val === choice && !correct) b.classList.add('incorrect');
+let queue=[], current=null, score=0, attempted=0, streak=0, answered=false;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function refillQueue(){queue=shuffle([...verbs]);}
+function nextVerb(){
+  if(queue.length===0)refillQueue();
+  current=queue.pop();answered=false;
+  document.getElementById('verb-display').textContent=current.verb;
+  document.getElementById('verb-meaning').textContent=current.meaning;
+  document.getElementById('feedback').style.display='none';
+  document.getElementById('next-btn').style.display='none';
+  document.querySelectorAll('.choice-btn').forEach(b=>{
+    b.disabled=false;
+    b.classList.remove('correct','incorrect','reveal');
   });
-  const fb = document.getElementById('feedback');
-  fb.style.display = 'block';
-  const resultText = correct ? '✓ Correct!' : `✗ Not quite — the answer is ${current.prep === 'rien' ? 'no preposition' : '"' + current.prep + '"'}`;
-  fb.innerHTML = `<div class="feedback-result ${correct ? 'correct' : 'incorrect'}">${resultText}</div><div class="feedback-example">${current.example}<br><em>${current.translation}</em></div>`;
-  document.getElementById('next-btn').style.display = 'block';
   updateProgress();
 }
-
-function updateProgress() {
-  document.getElementById('progress-fill').style.width = Math.min(100, (attempted % verbs.length) / verbs.length * 100) + '%';
+function answer(choice){
+  if(answered)return;
+  answered=true;attempted++;
+  const correct=choice===current.prep;
+  if(correct){score++;streak++;}else{streak=0;}
+  document.getElementById('score').textContent=score;
+  document.getElementById('attempted').textContent=attempted;
+  document.getElementById('streak').textContent=streak;
+  document.querySelectorAll('.choice-btn').forEach(b=>{
+    b.disabled=true;
+    const v=b.textContent.trim();
+    if(v===current.prep)b.classList.add('reveal');
+    if(v===choice&&!correct)b.classList.add('incorrect');
+  });
+  const fb=document.getElementById('feedback');
+  fb.style.display='block';
+  fb.className='feedback '+(correct?'fb-correct':'fb-incorrect');
+  const rt=correct?'✓ Correct!':`✗ Not quite — the answer is ${current.prep==='rien'?'no preposition':'"'+current.prep+'"'}`;
+  fb.innerHTML=`<div class="feedback-result ${correct?'correct':'incorrect'}">${rt}</div><div class="feedback-example">${current.example}<br><em>${current.translation}</em></div>`;
+  document.getElementById('next-btn').style.display='block';
+  updateProgress();
 }
-
-refillQueue();
-nextVerb();
+function updateProgress(){
+  document.getElementById('progress-fill').style.width=Math.min(100,(attempted%verbs.length)/verbs.length*100)+'%';
+}
+refillQueue();nextVerb();
 </script>
 </body>
 </html>
