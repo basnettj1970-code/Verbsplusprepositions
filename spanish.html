@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbo + infinitivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;background:#f9f9f7;color:#1a1a18;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.app{max-width:700px;margin:0 auto;padding:1.5rem 1rem 2rem;}
+.hdr{border-radius:12px;padding:1.5rem 2rem 1.25rem;margin-bottom:1.5rem;}
+.hdr h1{color:#fff;font-size:22px;font-weight:500;}
+.hdr p{color:rgba(255,255,255,.72);font-size:14px;margin-top:5px;line-height:1.5;}
+.hdr-student{background:#991B1B;}
+.hdr-teacher{background:#78350f;}
+.flag{display:flex;flex-direction:column;gap:3px;margin-top:4px;}
+.fs{width:34px;height:8px;border-radius:2px;}
+.hdr-inner{display:flex;justify-content:space-between;align-items:flex-start;}
+.intro{font-size:15px;color:#6b6b68;margin-bottom:1.25rem;text-align:center;}
+.level-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:1rem;}
+.lvl-btn{width:100%;padding:1rem 1.25rem;border-radius:12px;text-align:left;cursor:pointer;font-family:'Inter',system-ui,sans-serif;display:flex;align-items:center;gap:14px;transition:filter .12s;border:1.5px solid;}
+.lvl-btn:hover{filter:brightness(.97);}
+.lv-c{border-color:#3b82f6;background:#eff6ff;}
+.lv-l{border-color:#8b5cf6;background:#f5f3ff;}
+.lv-a{border-color:#f59e0b;background:#fffbeb;}
+.lv-custom{border-color:#0d9488;background:#f0fdfa;}
+.lname{font-size:16px;font-weight:500;display:block;}
+.lv-c .lname{color:#1d4ed8;}.lv-l .lname{color:#5b21b6;}.lv-a .lname{color:#92400e;}.lv-custom .lname{color:#0f766e;}
+.ldesc{font-size:13px;color:#6b6b68;margin-top:2px;display:block;}
+.lbadge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500;white-space:nowrap;margin-left:auto;}
+.lbadge-c{background:#dbeafe;color:#1e40af;}.lbadge-l{background:#ede9fe;color:#5b21b6;}.lbadge-a{background:#fef3c7;color:#92400e;}.lbadge-custom{background:#ccfbf1;color:#0f766e;}
+.home-link{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:.5rem;color:#6b6b68;font-size:13px;cursor:pointer;background:none;border:none;font-family:'Inter',system-ui,sans-serif;width:100%;padding:6px;}
+.home-link:hover{color:#1a1a18;}
+.teacher-link{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:.25rem;color:#6b6b68;font-size:13px;cursor:pointer;background:none;border:none;font-family:'Inter',system-ui,sans-serif;width:100%;padding:6px;}
+.teacher-link:hover{color:#1a1a18;}
+.back-btn{background:none;border:none;color:#6b6b68;font-size:13px;cursor:pointer;font-family:'Inter',system-ui,sans-serif;padding:0 0 1rem;display:inline-flex;align-items:center;gap:4px;}
+.back-btn:hover{color:#1a1a18;}
+.stats{display:flex;gap:12px;margin-bottom:1.5rem;}
+.stat{flex:1;border-radius:8px;padding:12px 16px;}
+.stat-c{background:#dcfce7;}.stat-c .sl{color:#166534;font-size:12px;margin-bottom:4px;}.stat-c .sv{color:#166534;font-size:22px;font-weight:500;}
+.stat-a{background:#dbeafe;}.stat-a .sl{color:#1e40af;font-size:12px;margin-bottom:4px;}.stat-a .sv{color:#1e40af;font-size:22px;font-weight:500;}
+.stat-s{background:#fef3c7;}.stat-s .sl{color:#92400e;font-size:12px;margin-bottom:4px;}.stat-s .sv{color:#92400e;font-size:22px;font-weight:500;}
+.card{background:#fff;border:0.5px solid rgba(0,0,0,.12);border-top:3px solid #991B1B;border-radius:12px;padding:2rem;margin-bottom:1.5rem;text-align:center;}
+.verb-label{font-size:13px;color:#6b6b68;margin-bottom:12px;letter-spacing:.05em;}
+.verb{font-size:42px;font-weight:500;color:#1a1a18;margin-bottom:8px;}
+.verb-meaning{font-size:15px;color:#6b6b68;}
+.ctx-tag{display:inline-block;font-size:11px;background:#fef3c7;color:#92400e;padding:3px 12px;border-radius:20px;margin-bottom:12px;font-weight:500;}
+.ctx-sent{font-size:19px;font-weight:500;color:#1a1a18;margin:6px 0 10px;line-height:1.6;}
+.blank{display:inline-block;min-width:38px;border-bottom:2.5px solid #991B1B;margin:0 3px;vertical-align:bottom;}
+.ctx-en{font-size:13px;color:#6b6b68;font-style:italic;}
+.ctx-verb{font-size:12px;color:#6b6b68;margin-top:10px;}
+.choices{display:flex;gap:12px;margin-bottom:1.5rem;justify-content:center;}
+.choice-btn{flex:1;max-width:160px;padding:14px 20px;border-radius:8px;font-size:20px;font-weight:500;cursor:pointer;transition:background .15s,transform .1s;font-family:'Inter',system-ui,sans-serif;border:1.5px solid;}
+.choice-btn:active{transform:scale(.97);}
+.choice-btn:disabled{cursor:default;opacity:.85;}
+.btn-a{background:#eff6ff;border-color:#3b82f6;color:#1d4ed8;}
+.btn-a:hover:not(:disabled){background:#dbeafe;}
+.btn-de{background:#fff1f2;border-color:#f43f5e;color:#be123c;}
+.btn-de:hover:not(:disabled){background:#ffe4e6;}
+.btn-nada{background:#f0fdf4;border-color:#22c55e;color:#15803d;font-size:14px;}
+.btn-nada:hover:not(:disabled){background:#dcfce7;}
+.choice-btn.reveal{background:#dcfce7;border-color:#16a34a;color:#166534;}
+.choice-btn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.feedback{background:#f1efe8;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;min-height:80px;border-left:4px solid #ccc;}
+.fb-ok{border-left-color:#16a34a;}.fb-no{border-left-color:#dc2626;}
+.fr{font-size:13px;font-weight:500;margin-bottom:6px;}
+.fr.ok{color:#166534;}.fr.no{color:#991b1b;}
+.fex{font-size:15px;color:#1a1a18;line-height:1.6;}
+.fex em{font-style:italic;color:#6b6b68;font-size:14px;}
+.next-btn{width:100%;padding:14px;border:1.5px solid #991B1B;border-radius:8px;background:#fff1f2;color:#991B1B;font-size:15px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;transition:background .12s;display:none;}
+.next-btn:hover{background:#ffe4e6;}
+.progress{height:4px;background:rgba(0,0,0,.1);border-radius:2px;margin-top:1.5rem;}
+.progress-fill{height:100%;background:#991B1B;border-radius:2px;transition:width .4s ease;}
+.highlight{font-weight:500;}
+.login-box{background:#fff;border:0.5px solid rgba(0,0,0,.12);border-radius:12px;padding:2rem;text-align:center;max-width:360px;margin:0 auto;}
+.login-box h2{font-size:18px;font-weight:500;margin-bottom:6px;}
+.login-box p{font-size:13px;color:#6b6b68;margin-bottom:1.5rem;}
+.login-box input{width:100%;padding:10px 14px;border:0.5px solid rgba(0,0,0,.3);border-radius:8px;font-size:16px;font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a18;margin-bottom:10px;text-align:center;letter-spacing:3px;}
+.login-box input:focus{outline:none;border-color:#f59e0b;}
+.login-err{font-size:13px;color:#991b1b;margin-bottom:10px;display:none;}
+.login-go{width:100%;padding:12px;border:1.5px solid #f59e0b;border-radius:8px;background:#fef3c7;color:#92400e;font-size:15px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;}
+.login-go:hover{background:#fde68a;}
+.t-tabs{display:flex;border:0.5px solid rgba(0,0,0,.2);border-radius:8px;overflow:hidden;margin-bottom:1.25rem;}
+.t-tab{flex:1;padding:9px;border:none;background:#fff;color:#6b6b68;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;}
+.t-tab+.t-tab{border-left:0.5px solid rgba(0,0,0,.2);}
+.t-tab.active{background:#78350f;color:#fff;}
+.t-filters{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;}
+.t-filters input{flex:1;min-width:120px;padding:8px 12px;border:0.5px solid rgba(0,0,0,.2);border-radius:8px;font-size:14px;font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a18;}
+.t-filters input:focus{outline:none;border-color:#f59e0b;}
+.filter-grp{display:flex;border:0.5px solid rgba(0,0,0,.2);border-radius:8px;overflow:hidden;}
+.fpill{padding:7px 12px;border:none;background:#fff;color:#6b6b68;font-size:13px;cursor:pointer;font-family:'Inter',system-ui,sans-serif;}
+.fpill+.fpill{border-left:0.5px solid rgba(0,0,0,.2);}
+.fpill.on{background:#78350f;color:#fff;}
+.t-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.t-meta span{font-size:12px;color:#6b6b68;}
+.t-meta-btns{display:flex;gap:6px;}
+.t-mini-btn{font-size:12px;padding:4px 10px;border:0.5px solid rgba(0,0,0,.2);border-radius:20px;background:#fff;color:#6b6b68;cursor:pointer;font-family:'Inter',system-ui,sans-serif;}
+.t-mini-btn:hover{background:#f1efe8;}
+.vlist{max-height:320px;overflow-y:auto;border:0.5px solid rgba(0,0,0,.12);border-radius:8px;}
+.vrow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:0.5px solid rgba(0,0,0,.08);cursor:pointer;transition:background .1s;background:#fff;}
+.vrow:last-child{border-bottom:none;}
+.vrow:hover{background:#f9f9f7;}
+.vrow.sel{background:#fff7ed;}
+.vrow input[type=checkbox]{width:16px;height:16px;accent-color:#f59e0b;cursor:pointer;flex-shrink:0;}
+.vrow-verb{font-size:14px;font-weight:500;color:#1a1a18;min-width:130px;}
+.pbadge{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500;flex-shrink:0;}
+.pb-a{background:#dbeafe;color:#1e40af;}.pb-de{background:#fee2e2;color:#991b1b;}.pb-n{background:#dcfce7;color:#166534;}
+.vrow-m{font-size:13px;color:#6b6b68;flex:1;}
+.lvdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.lvdot-common{background:#3b82f6;}.lvdot-less{background:#8b5cf6;}
+.add-form{background:#fff;border:0.5px solid rgba(0,0,0,.12);border-radius:12px;padding:1.25rem;}
+.frow{margin-bottom:1rem;}
+.frow label{display:block;font-size:13px;font-weight:500;color:#6b6b68;margin-bottom:5px;}
+.frow input,.frow select{width:100%;padding:9px 12px;border:0.5px solid rgba(0,0,0,.2);border-radius:8px;font-size:14px;font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a18;}
+.frow input:focus,.frow select:focus{outline:none;border-color:#f59e0b;}
+.prep-opts{display:flex;gap:8px;}
+.prep-opt{flex:1;padding:9px;border:1.5px solid rgba(0,0,0,.2);border-radius:8px;font-size:18px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;background:#fff;color:#6b6b68;text-align:center;}
+.prep-opt.on{border-color:#f59e0b;background:#fef3c7;color:#92400e;}
+.add-verb-btn{width:100%;padding:12px;border:1.5px solid #f59e0b;border-radius:8px;background:#fef3c7;color:#92400e;font-size:15px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;margin-top:4px;}
+.add-verb-btn:hover{background:#fde68a;}
+.add-fb{font-size:13px;margin-top:8px;padding:8px 12px;border-radius:8px;display:none;}
+.add-fb.ok{background:#dcfce7;color:#166534;}.add-fb.no{background:#fee2e2;color:#991b1b;}
+.custom-sum{background:#f1efe8;border-radius:12px;padding:1.25rem;margin-top:1.25rem;}
+.sum-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.sum-hdr span{font-size:14px;font-weight:500;color:#1a1a18;}
+.sum-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;min-height:32px;}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:20px;background:#fff;border:0.5px solid rgba(0,0,0,.15);color:#1a1a18;}
+.chip button{background:none;border:none;cursor:pointer;color:#6b6b68;font-size:16px;padding:0;line-height:1;}
+.chip button:hover{color:#991b1b;}
+.save-btn{width:100%;padding:13px;border:1.5px solid #0d9488;border-radius:8px;background:#f0fdfa;color:#0f766e;font-size:15px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;}
+.save-btn:hover:not(:disabled){background:#ccfbf1;}
+.save-btn:disabled{opacity:.5;cursor:default;}
+.empty-msg{font-size:13px;color:#6b6b68;font-style:italic;}
+</style>
+</head>
+<body>
+<div class="app">
+<h2 class="sr-only">Spanish verb preposition practice</h2>
+
+<div id="s-hdr" class="hdr hdr-student">
+  <div class="hdr-inner">
+    <div>
+      <h1 id="hdr-title">Verbo + infinitivo</h1>
+      <p id="hdr-sub">¿Qué preposición une el verbo con el infinitivo? Elige <strong>nada</strong> si no se necesita ninguna.</p>
+    </div>
+    <div class="flag">
+      <div class="fs" style="background:#C60B1E;"></div>
+      <div class="fs" style="background:#FFC400;"></div>
+      <div class="fs" style="background:#C60B1E;"></div>
+    </div>
+  </div>
+</div>
+
+<div id="s-land">
+  <p class="intro">Choose your level to start:</p>
+  <div class="level-cards">
+    <button class="lvl-btn lv-c" onclick="startQuiz('common')">
+      <div style="flex:1"><span class="lname">Common verbs</span><span class="ldesc">Essential verbs every student needs — ideal for retrieval practice</span></div>
+      <span class="lbadge lbadge-c">Foundation</span>
+    </button>
+    <button class="lvl-btn lv-l" onclick="startQuiz('less-common')">
+      <div style="flex:1"><span class="lname">Less common verbs</span><span class="ldesc">More sophisticated vocabulary for the highest grades</span></div>
+      <span class="lbadge lbadge-l">Advanced</span>
+    </button>
+    <button class="lvl-btn lv-a" onclick="startQuiz('all')">
+      <div style="flex:1"><span class="lname">All verbs</span><span class="ldesc">The complete challenge — common and advanced mixed</span></div>
+      <span class="lbadge lbadge-a">Full list</span>
+    </button>
+    <button class="lvl-btn lv-custom" id="custom-btn" onclick="startQuiz('custom')" style="display:none">
+      <div style="flex:1"><span class="lname" id="custom-btn-name">Custom set</span><span class="ldesc">Teacher-selected verbs</span></div>
+      <span class="lbadge lbadge-custom">Custom</span>
+    </button>
+  </div>
+  <button class="home-link" onclick="window.location.href='index.html'">← Back to language menu</button>
+  <button class="teacher-link" onclick="showLogin()">&#128274; Teacher panel</button>
+</div>
+
+<div id="s-login" style="display:none">
+  <div class="login-box">
+    <h2>Teacher panel</h2>
+    <p>Enter the teacher password to access the custom verb editor.</p>
+    <input type="password" id="pass-inp" placeholder="Password" onkeydown="if(event.key==='Enter')tryLogin()">
+    <div class="login-err" id="login-err">Incorrect password — try again.</div>
+    <button class="login-go" onclick="tryLogin()">Sign in</button>
+    <button class="back-btn" style="margin-top:1rem;justify-content:center;width:100%" onclick="showLand()">← Back</button>
+  </div>
+</div>
+
+<div id="s-teacher" style="display:none">
+  <button class="back-btn" onclick="showLand()">← Back to student view</button>
+  <div class="t-tabs">
+    <button class="t-tab active" id="tt-sel" onclick="setTTab('sel')">&#10003; Select from list</button>
+    <button class="t-tab" id="tt-add" onclick="setTTab('add')">+ Add new verb</button>
+  </div>
+  <div id="tp-sel">
+    <div class="t-filters">
+      <input type="text" id="t-search" placeholder="Search verbs…" oninput="tSearch=this.value;renderVList()">
+      <div class="filter-grp">
+        <button class="fpill on" id="fp-all" onclick="setFP('all')">All</button>
+        <button class="fpill" id="fp-a" onclick="setFP('a')">a</button>
+        <button class="fpill" id="fp-de" onclick="setFP('de')">de</button>
+        <button class="fpill" id="fp-nada" onclick="setFP('nada')">nada</button>
+      </div>
+    </div>
+    <div class="t-meta">
+      <span id="vlist-count"></span>
+      <div class="t-meta-btns">
+        <button class="t-mini-btn" onclick="selectAllShown()">Select all shown</button>
+        <button class="t-mini-btn" onclick="deselectAll()">Deselect all</button>
+      </div>
+    </div>
+    <div class="vlist" id="vlist"></div>
+  </div>
+  <div id="tp-add" style="display:none">
+    <div class="add-form">
+      <div class="frow"><label>Verb *</label><input type="text" id="nv-verb" placeholder="e.g. conseguir"></div>
+      <div class="frow">
+        <label>Preposition *</label>
+        <div class="prep-opts">
+          <button class="prep-opt on" id="po-a" onclick="selPrep('a')">a</button>
+          <button class="prep-opt" id="po-de" onclick="selPrep('de')">de</button>
+          <button class="prep-opt" id="po-nada" onclick="selPrep('nada')" style="font-size:14px">nada</button>
+        </div>
+      </div>
+      <div class="frow"><label>English meaning *</label><input type="text" id="nv-m" placeholder="e.g. to manage to"></div>
+      <div class="frow"><label>Example sentence in Spanish <span style="font-weight:400">(optional)</span></label><input type="text" id="nv-ex" placeholder="e.g. Por fin consigue hablar español."></div>
+      <div class="frow"><label>English translation <span style="font-weight:400">(optional)</span></label><input type="text" id="nv-tr" placeholder="e.g. He finally manages to speak Spanish."></div>
+      <div class="frow"><label>Level</label><select id="nv-lv"><option value="common">Common</option><option value="less-common">Less common</option></select></div>
+      <button class="add-verb-btn" onclick="addVerb()">+ Add to custom set</button>
+      <div class="add-fb" id="add-fb"></div>
+    </div>
+  </div>
+  <div class="custom-sum">
+    <div class="sum-hdr">
+      <span id="sum-count">0 verbs in custom set</span>
+      <button class="t-mini-btn" onclick="clearAll()">Clear all</button>
+    </div>
+    <div class="sum-chips" id="sum-chips"><span class="empty-msg">No verbs selected yet.</span></div>
+    <button class="save-btn" id="save-btn" onclick="saveSet()" disabled>Save &amp; make available to students</button>
+  </div>
+</div>
+
+<div id="s-quiz" style="display:none">
+  <button class="back-btn" onclick="showLand()">← Change level</button>
+  <div class="stats">
+    <div class="stat stat-c"><div class="sl">correct</div><div class="sv" id="q-score">0</div></div>
+    <div class="stat stat-a"><div class="sl">attempted</div><div class="sv" id="q-att">0</div></div>
+    <div class="stat stat-s"><div class="sl">streak</div><div class="sv" id="q-str">0</div></div>
+  </div>
+  <div class="card" id="q-card"></div>
+  <div class="choices">
+    <button class="choice-btn btn-a" onclick="answer('a')">a</button>
+    <button class="choice-btn btn-de" onclick="answer('de')">de</button>
+    <button class="choice-btn btn-nada" onclick="answer('nada')">nada</button>
+  </div>
+  <div class="feedback" id="q-fb" style="display:none"></div>
+  <button class="next-btn" id="q-next" onclick="nextVerb()">Verbo siguiente →</button>
+  <div class="progress"><div class="progress-fill" id="q-prog" style="width:0%"></div></div>
+</div>
+</div>
+
+<script>
+const PASS='teacher2024';
+const V=[
+ // COMMON · a
+ {v:"aprender",p:"a",m:"to learn to",lv:"common",dual:false,ex:"Aprende <span class='highlight'>a</span> tocar la guitarra.",tr:"He learns to play the guitar."},
+ {v:"empezar",p:"a",m:"to begin to",lv:"common",dual:false,ex:"Empieza <span class='highlight'>a</span> llover.",tr:"It starts to rain."},
+ {v:"comenzar",p:"a",m:"to start to",lv:"common",dual:false,ex:"Comienza <span class='highlight'>a</span> entender la lección.",tr:"She starts to understand the lesson."},
+ {v:"ayudar",p:"a",m:"to help to",lv:"common",dual:false,ex:"Ayuda <span class='highlight'>a</span> su hermana a estudiar.",tr:"He helps his sister to study."},
+ {v:"enseñar",p:"a",m:"to teach to",lv:"common",dual:false,ex:"Le enseña <span class='highlight'>a</span> conducir.",tr:"She teaches him to drive."},
+ {v:"invitar",p:"a",m:"to invite to",lv:"common",dual:false,ex:"Te invito <span class='highlight'>a</span> cenar.",tr:"I invite you to dinner."},
+ {v:"volver",p:"a",m:"to do (something) again",lv:"common",dual:false,ex:"Vuelve <span class='highlight'>a</span> intentarlo.",tr:"He tries again."},
+ {v:"ponerse",p:"a",m:"to start to (suddenly)",lv:"common",dual:false,ex:"Se pone <span class='highlight'>a</span> llorar.",tr:"She starts to cry."},
+ {v:"acostumbrarse",p:"a",m:"to get used to",lv:"common",dual:false,ex:"Se acostumbra <span class='highlight'>a</span> vivir solo.",tr:"He gets used to living alone."},
+ {v:"atreverse",p:"a",m:"to dare to",lv:"common",dual:false,ex:"No se atreve <span class='highlight'>a</span> hablar en público.",tr:"He doesn't dare to speak in public."},
+ {v:"negarse",p:"a",m:"to refuse to",lv:"common",dual:false,ex:"Se niega <span class='highlight'>a</span> comer verduras.",tr:"She refuses to eat vegetables."},
+ {v:"obligar",p:"a",m:"to force / to oblige to",lv:"common",dual:false,ex:"Le obliga <span class='highlight'>a</span> trabajar los fines de semana.",tr:"He forces her to work at weekends."},
+ {v:"ir",p:"a",m:"to be going to",lv:"common",dual:false,ex:"Va <span class='highlight'>a</span> salir mañana.",tr:"She is going to go out tomorrow."},
+ {v:"dedicarse",p:"a",m:"to devote oneself to",lv:"common",dual:false,ex:"Se dedica <span class='highlight'>a</span> ayudar a los demás.",tr:"She devotes herself to helping others."},
+ {v:"animarse",p:"a",m:"to pluck up the courage to",lv:"common",dual:false,ex:"Por fin se anima <span class='highlight'>a</span> hablar en público.",tr:"He finally plucks up the courage to speak in public."},
+ // COMMON · de
+ {v:"acabar",p:"de",m:"to have just done",lv:"common",dual:false,ex:"Acabo <span class='highlight'>de</span> comer.",tr:"I have just eaten."},
+ {v:"tratar",p:"de",m:"to try to",lv:"common",dual:false,ex:"Trata <span class='highlight'>de</span> entender.",tr:"He tries to understand."},
+ {v:"olvidarse",p:"de",m:"to forget to",lv:"common",dual:false,ex:"Se olvida <span class='highlight'>de</span> cerrar la puerta.",tr:"She forgets to close the door."},
+ {v:"alegrarse",p:"de",m:"to be glad to",lv:"common",dual:false,ex:"Me alegro <span class='highlight'>de</span> verte.",tr:"I'm glad to see you."},
+ {v:"acordarse",p:"de",m:"to remember to",lv:"common",dual:false,ex:"Se acuerda <span class='highlight'>de</span> llamar a su madre.",tr:"She remembers to call her mother."},
+ {v:"quejarse",p:"de",m:"to complain about doing",lv:"common",dual:false,ex:"Se queja <span class='highlight'>de</span> trabajar demasiado.",tr:"He complains about working too much."},
+ {v:"terminar",p:"de",m:"to finish doing",lv:"common",dual:false,ex:"Termina <span class='highlight'>de</span> comer antes de salir.",tr:"Finish eating before going out."},
+ {v:"arrepentirse",p:"de",m:"to regret doing",lv:"common",dual:false,ex:"Se arrepiente <span class='highlight'>de</span> haberlo dicho.",tr:"She regrets having said it."},
+ {v:"cansarse",p:"de",m:"to get tired of doing",lv:"common",dual:false,ex:"Se cansa <span class='highlight'>de</span> esperar.",tr:"He gets tired of waiting."},
+ {v:"encargarse",p:"de",m:"to take charge of doing",lv:"common",dual:false,ex:"Se encarga <span class='highlight'>de</span> organizar todo.",tr:"She takes charge of organising everything."},
+ {v:"tener ganas",p:"de",m:"to feel like doing",lv:"common",dual:false,ex:"Tiene ganas <span class='highlight'>de</span> salir.",tr:"He feels like going out."},
+ {v:"tener miedo",p:"de",m:"to be afraid of doing",lv:"common",dual:false,ex:"Tiene miedo <span class='highlight'>de</span> fracasar.",tr:"She is afraid of failing."},
+ {v:"hartarse",p:"de",m:"to get fed up with doing",lv:"common",dual:false,ex:"Se harta <span class='highlight'>de</span> esperar.",tr:"He gets fed up with waiting."},
+ {v:"tener la intención",p:"de",m:"to intend to",lv:"common",dual:false,ex:"Tiene la intención <span class='highlight'>de</span> estudiar en el extranjero.",tr:"She intends to study abroad."},
+ // COMMON · nada
+ {v:"querer",p:"nada",m:"to want to",lv:"common",dual:false,ex:"Ella <span class='highlight'>quiere</span> viajar por el mundo.",tr:"She wants to travel the world."},
+ {v:"poder",p:"nada",m:"to be able to",lv:"common",dual:false,ex:"Ella <span class='highlight'>puede</span> venir conmigo.",tr:"She can come with me."},
+ {v:"deber",p:"nada",m:"to have to / must",lv:"common",dual:false,ex:"Ella <span class='highlight'>debe</span> trabajar más.",tr:"She must work more."},
+ {v:"saber",p:"nada",m:"to know how to",lv:"common",dual:false,ex:"Ella <span class='highlight'>sabe</span> nadar muy bien.",tr:"She knows how to swim very well."},
+ {v:"necesitar",p:"nada",m:"to need to",lv:"common",dual:false,ex:"Ella <span class='highlight'>necesita</span> dormir más.",tr:"She needs to sleep more."},
+ {v:"desear",p:"nada",m:"to wish to",lv:"common",dual:false,ex:"Él <span class='highlight'>desea</span> viajar a España.",tr:"He wishes to travel to Spain."},
+ {v:"esperar",p:"nada",m:"to hope to",lv:"common",dual:false,ex:"Ella <span class='highlight'>espera</span> aprobar el examen.",tr:"She hopes to pass the exam."},
+ {v:"pensar",p:"nada",m:"to plan to",lv:"common",dual:false,ex:"Él <span class='highlight'>piensa</span> estudiar en el extranjero.",tr:"He plans to study abroad."},
+ {v:"preferir",p:"nada",m:"to prefer to",lv:"common",dual:false,ex:"Ella <span class='highlight'>prefiere</span> quedarse en casa.",tr:"She prefers to stay at home."},
+ {v:"intentar",p:"nada",m:"to try to",lv:"common",dual:false,ex:"Él <span class='highlight'>intenta</span> comprender.",tr:"He tries to understand."},
+ {v:"conseguir",p:"nada",m:"to manage to / to achieve",lv:"common",dual:false,ex:"Por fin <span class='highlight'>consigue</span> hablar español con fluidez.",tr:"He finally manages to speak Spanish fluently."},
+ {v:"parecer",p:"nada",m:"to seem to",lv:"common",dual:false,ex:"Ella <span class='highlight'>parece</span> entender la situación.",tr:"She seems to understand the situation."},
+ {v:"soler",p:"nada",m:"to usually do",lv:"common",dual:false,ex:"Él <span class='highlight'>suele</span> llegar tarde.",tr:"He usually arrives late."},
+ {v:"lograr",p:"nada",m:"to manage to / to achieve",lv:"common",dual:false,ex:"Ella <span class='highlight'>logra</span> convencerle.",tr:"She manages to convince him."},
+ {v:"temer",p:"nada",m:"to fear doing",lv:"common",dual:false,ex:"Él <span class='highlight'>teme</span> fracasar en el examen.",tr:"He fears failing in the exam."},
+ {v:"ver",p:"nada",m:"to see (someone do)",lv:"common",dual:false,ex:"Le <span class='highlight'>veo</span> trabajar todos los días.",tr:"I see him working every day."},
+ {v:"oír",p:"nada",m:"to hear (someone do)",lv:"common",dual:false,ex:"La <span class='highlight'>oigo</span> cantar.",tr:"I hear her singing."},
+ {v:"sentir",p:"nada",m:"to feel (someone do)",lv:"common",dual:false,ex:"Lo <span class='highlight'>siento</span> moverse.",tr:"I feel it moving."},
+ // COMMON · dual
+ {v:"dejar",p:"nada",m:"to let / to allow (someone) to",lv:"common",dual:true,
+  sent:"Los padres le dejan ___ salir los fines de semana.",sentEn:"The parents let him go out at weekends.",
+  ex:"El médico le <span class='highlight'>deja</span> volver a casa.",tr:"The doctor lets him go home."},
+ {v:"dejar",p:"de",m:"to stop doing",lv:"common",dual:true,
+  sent:"Deja ___ fumar, es malo para la salud.",sentEn:"Stop smoking, it's bad for your health.",
+  ex:"Por fin <span class='highlight'>deja de</span> llover.",tr:"It finally stops raining."},
+ // LESS COMMON · a
+ {v:"decidirse",p:"a",m:"to decide to / make up one's mind to",lv:"less-common",dual:false,ex:"Por fin se decide <span class='highlight'>a</span> hablar.",tr:"She finally decides to speak."},
+ {v:"resistirse",p:"a",m:"to resist doing",lv:"less-common",dual:false,ex:"No puede resistirse <span class='highlight'>a</span> comer chocolate.",tr:"She can't resist eating chocolate."},
+ {v:"limitarse",p:"a",m:"to limit oneself to",lv:"less-common",dual:false,ex:"Se limita <span class='highlight'>a</span> observar.",tr:"She limits herself to observing."},
+ {v:"comprometerse",p:"a",m:"to commit to",lv:"less-common",dual:false,ex:"Se compromete <span class='highlight'>a</span> trabajar más.",tr:"He commits to working harder."},
+ {v:"aspirar",p:"a",m:"to aspire to",lv:"less-common",dual:false,ex:"Aspira <span class='highlight'>a</span> ser médico.",tr:"She aspires to be a doctor."},
+ {v:"contribuir",p:"a",m:"to contribute to",lv:"less-common",dual:false,ex:"Contribuye <span class='highlight'>a</span> mejorar la situación.",tr:"She contributes to improving the situation."},
+ {v:"renunciar",p:"a",m:"to give up / to renounce",lv:"less-common",dual:false,ex:"Renuncia <span class='highlight'>a</span> participar en el proyecto.",tr:"She gives up on participating in the project."},
+ {v:"disponerse",p:"a",m:"to get ready to",lv:"less-common",dual:false,ex:"Se dispone <span class='highlight'>a</span> salir.",tr:"She gets ready to leave."},
+ {v:"arriesgarse",p:"a",m:"to risk doing",lv:"less-common",dual:false,ex:"Se arriesga <span class='highlight'>a</span> perder todo.",tr:"He risks losing everything."},
+ {v:"lanzarse",p:"a",m:"to launch into",lv:"less-common",dual:false,ex:"Se lanza <span class='highlight'>a</span> hablar sin pensar.",tr:"She launches into speaking without thinking."},
+ {v:"oponerse",p:"a",m:"to oppose doing",lv:"less-common",dual:false,ex:"Se opone <span class='highlight'>a</span> cambiar las normas.",tr:"He opposes changing the rules."},
+ {v:"prestarse",p:"a",m:"to agree to / to offer to",lv:"less-common",dual:false,ex:"Se presta <span class='highlight'>a</span> ayudar en cualquier momento.",tr:"He offers to help at any time."},
+ {v:"aficionarse",p:"a",m:"to become fond of doing",lv:"less-common",dual:false,ex:"Se aficiona <span class='highlight'>a</span> coleccionar sellos.",tr:"He becomes fond of collecting stamps."},
+ // LESS COMMON · de
+ {v:"cesar",p:"de",m:"to cease doing / to stop",lv:"less-common",dual:false,ex:"Cesa <span class='highlight'>de</span> llover por fin.",tr:"It finally ceases raining."},
+ {v:"avergonzarse",p:"de",m:"to be ashamed of doing",lv:"less-common",dual:false,ex:"Se avergüenza <span class='highlight'>de</span> haber mentido.",tr:"She is ashamed of having lied."},
+ {v:"presumir",p:"de",m:"to boast about doing",lv:"less-common",dual:false,ex:"Presume <span class='highlight'>de</span> saber todo.",tr:"He boasts about knowing everything."},
+ {v:"abstenerse",p:"de",m:"to abstain from doing",lv:"less-common",dual:false,ex:"Se abstiene <span class='highlight'>de</span> hacer comentarios.",tr:"She abstains from making comments."},
+ {v:"ocuparse",p:"de",m:"to take care of doing",lv:"less-common",dual:false,ex:"Se ocupa <span class='highlight'>de</span> organizar el evento.",tr:"She takes care of organising the event."},
+ {v:"preocuparse",p:"de",m:"to worry about / take care to",lv:"less-common",dual:false,ex:"Se preocupa <span class='highlight'>de</span> hacer las cosas bien.",tr:"He makes sure to do things well."},
+ {v:"aprovecharse",p:"de",m:"to take advantage of doing",lv:"less-common",dual:false,ex:"Se aprovecha <span class='highlight'>de</span> trabajar cerca de casa.",tr:"She takes advantage of working near home."},
+ {v:"jactarse",p:"de",m:"to boast about doing",lv:"less-common",dual:false,ex:"Se jacta <span class='highlight'>de</span> hablar cinco idiomas.",tr:"He boasts about speaking five languages."},
+ {v:"librarse",p:"de",m:"to get out of doing",lv:"less-common",dual:false,ex:"Se libra <span class='highlight'>de</span> trabajar ese día.",tr:"She gets out of working that day."},
+ {v:"privarse",p:"de",m:"to deprive oneself of doing",lv:"less-common",dual:false,ex:"Se priva <span class='highlight'>de</span> salir para ahorrar dinero.",tr:"She deprives herself of going out to save money."},
+ // LESS COMMON · nada
+ {v:"pretender",p:"nada",m:"to claim to / to try to",lv:"less-common",dual:false,ex:"Él <span class='highlight'>pretende</span> saberlo todo.",tr:"He claims to know everything."},
+ {v:"procurar",p:"nada",m:"to try to / to endeavour to",lv:"less-common",dual:false,ex:"Ella <span class='highlight'>procura</span> llegar a tiempo.",tr:"She tries her best to arrive on time."},
+ {v:"reconocer",p:"nada",m:"to acknowledge / to admit",lv:"less-common",dual:false,ex:"Ella <span class='highlight'>reconoce</span> haber cometido un error.",tr:"She acknowledges having made a mistake."},
+ {v:"admitir",p:"nada",m:"to admit",lv:"less-common",dual:false,ex:"Él <span class='highlight'>admite</span> no entender la situación.",tr:"He admits not understanding the situation."},
+ {v:"negar",p:"nada",m:"to deny doing",lv:"less-common",dual:false,ex:"Él <span class='highlight'>niega</span> haber mentido.",tr:"He denies having lied."},
+ {v:"afirmar",p:"nada",m:"to claim to",lv:"less-common",dual:false,ex:"Ella <span class='highlight'>afirma</span> tener razón.",tr:"She claims to be right."},
+ {v:"confesar",p:"nada",m:"to confess to",lv:"less-common",dual:false,ex:"Él <span class='highlight'>confiesa</span> haber cometido un error.",tr:"He confesses to having made a mistake."},
+ {v:"asegurar",p:"nada",m:"to claim / to assure",lv:"less-common",dual:false,ex:"Ella <span class='highlight'>asegura</span> saber la respuesta.",tr:"She claims to know the answer."},
+ {v:"merecer",p:"nada",m:"to deserve to",lv:"less-common",dual:false,ex:"Ella <span class='highlight'>merece</span> ganar.",tr:"She deserves to win."},
+ {v:"prometer",p:"nada",m:"to promise to",lv:"less-common",dual:false,ex:"Él <span class='highlight'>promete</span> volver pronto.",tr:"He promises to come back soon."},
+ {v:"fingir",p:"nada",m:"to pretend to",lv:"less-common",dual:false,ex:"Él <span class='highlight'>finge</span> entender.",tr:"He pretends to understand."},
+ {v:"recordar",p:"nada",m:"to remember to",lv:"less-common",dual:false,ex:"Ella <span class='highlight'>recuerda</span> cerrar la puerta.",tr:"She remembers to close the door."},
+];
+
+function esc(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):'';} 
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+let pool=[],queue=[],current=null,score=0,attempted=0,streak=0,answered=false;
+let selIdx=new Set(),addedVerbs=[],tFilter='all',tSearch='',tTab='sel',newPrep='a';
+let savedCustom=null;
+
+function showLand(){
+  ['s-login','s-teacher','s-quiz'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('s-land').style.display='block';
+  document.getElementById('s-hdr').className='hdr hdr-student';
+  document.getElementById('hdr-title').textContent='Verbo + infinitivo';
+  document.getElementById('hdr-sub').textContent='¿Qué preposición une el verbo con el infinitivo? Elige nada si no se necesita ninguna.';
+  refreshCustomBtn();
+}
+
+function refreshCustomBtn(){
+  const p=getCustomPool();
+  const btn=document.getElementById('custom-btn');
+  if(p.length>0){btn.style.display='flex';document.getElementById('custom-btn-name').textContent='Custom set ('+p.length+' verbs)';}
+  else btn.style.display='none';
+}
+
+function showLogin(){
+  document.getElementById('s-land').style.display='none';
+  document.getElementById('s-login').style.display='block';
+  document.getElementById('pass-inp').value='';
+  document.getElementById('login-err').style.display='none';
+  setTimeout(()=>document.getElementById('pass-inp').focus(),100);
+}
+
+function tryLogin(){
+  const p=document.getElementById('pass-inp').value;
+  if(p===PASS){
+    document.getElementById('login-err').style.display='none';
+    document.getElementById('s-login').style.display='none';
+    document.getElementById('s-teacher').style.display='block';
+    document.getElementById('s-hdr').className='hdr hdr-teacher';
+    document.getElementById('hdr-title').textContent='Teacher panel';
+    document.getElementById('hdr-sub').textContent='Build a custom verb set for your class';
+    loadSaved();renderVList();renderSummary();
+  } else {
+    document.getElementById('login-err').style.display='block';
+    document.getElementById('pass-inp').value='';
+    document.getElementById('pass-inp').focus();
+  }
+}
+
+function loadSaved(){
+  try{const s=localStorage.getItem('spanishQuizCustom');if(s){const d=JSON.parse(s);selIdx=new Set(d.sel||[]);addedVerbs=d.added||[];return;}}catch(e){}
+  if(savedCustom){selIdx=new Set(savedCustom.sel||[]);addedVerbs=savedCustom.added||[];}
+}
+
+function getCustomPool(){return [...V.filter((_,i)=>selIdx.has(i)),...addedVerbs];}
+
+function setTTab(t){
+  tTab=t;
+  document.getElementById('tt-sel').classList.toggle('active',t==='sel');
+  document.getElementById('tt-add').classList.toggle('active',t==='add');
+  document.getElementById('tp-sel').style.display=t==='sel'?'block':'none';
+  document.getElementById('tp-add').style.display=t==='add'?'block':'none';
+}
+
+function setFP(f){
+  tFilter=f;
+  ['all','a','de','nada'].forEach(k=>{const el=document.getElementById('fp-'+k);if(el)el.classList.toggle('on',k===f);});
+  renderVList();
+}
+
+function renderVList(){
+  const filtered=V.map((v,i)=>({...v,i}))
+    .filter(v=>tFilter==='all'||v.p===tFilter)
+    .filter(v=>!tSearch||v.v.toLowerCase().includes(tSearch.toLowerCase())||v.m.toLowerCase().includes(tSearch.toLowerCase()));
+  document.getElementById('vlist-count').textContent=filtered.length+' verbs shown';
+  const h=filtered.map(v=>`<div class="vrow${selIdx.has(v.i)?' sel':''}" onclick="toggleV(${v.i})">
+    <input type="checkbox" ${selIdx.has(v.i)?'checked':''} onclick="event.stopPropagation();toggleV(${v.i})">
+    <span class="vrow-verb">${esc(v.v)}</span>
+    <span class="pbadge ${v.p==='a'?'pb-a':v.p==='de'?'pb-de':'pb-n'}">${v.p}</span>
+    <span class="vrow-m">${esc(v.m)}</span>
+    <span class="lvdot ${v.lv==='common'?'lvdot-common':'lvdot-less'}" title="${v.lv}"></span>
+  </div>`).join('');
+  document.getElementById('vlist').innerHTML=h||'<div style="padding:1rem;text-align:center;color:#6b6b68;font-size:13px">No verbs match your filter.</div>';
+}
+
+function toggleV(i){if(selIdx.has(i))selIdx.delete(i);else selIdx.add(i);renderVList();renderSummary();}
+function selectAllShown(){
+  V.map((_,i)=>i).filter(i=>(tFilter==='all'||V[i].p===tFilter)&&(!tSearch||V[i].v.toLowerCase().includes(tSearch.toLowerCase())||V[i].m.toLowerCase().includes(tSearch.toLowerCase()))).forEach(i=>selIdx.add(i));
+  renderVList();renderSummary();
+}
+function deselectAll(){selIdx.clear();renderVList();renderSummary();}
+function clearAll(){selIdx.clear();addedVerbs=[];renderVList();renderSummary();}
+
+function renderSummary(){
+  const p=getCustomPool();
+  document.getElementById('sum-count').textContent=p.length+' verb'+(p.length===1?'':'s')+' in custom set';
+  document.getElementById('save-btn').disabled=p.length===0;
+  const chips=p.map((v,i)=>`<span class="chip"><span class="pbadge ${v.p==='a'?'pb-a':v.p==='de'?'pb-de':'pb-n'}" style="font-size:10px;padding:1px 6px">${v.p}</span>${esc(v.v)}<button onclick="removeFromSet(${i})" title="Remove">&#x2715;</button></span>`).join('');
+  document.getElementById('sum-chips').innerHTML=chips||'<span class="empty-msg">No verbs selected yet.</span>';
+}
+
+function removeFromSet(i){
+  const p=getCustomPool();const item=p[i];
+  const vi=V.findIndex(v=>v===item);
+  if(vi>=0)selIdx.delete(vi);
+  else{const ai=addedVerbs.indexOf(item);if(ai>=0)addedVerbs.splice(ai,1);}
+  renderVList();renderSummary();
+}
+
+function selPrep(p){
+  newPrep=p;
+  ['a','de','nada'].forEach(pp=>document.getElementById('po-'+pp).classList.toggle('on',pp===p));
+}
+
+function addVerb(){
+  const verb=document.getElementById('nv-verb').value.trim();
+  const meaning=document.getElementById('nv-m').value.trim();
+  const ex=document.getElementById('nv-ex').value.trim();
+  const tr=document.getElementById('nv-tr').value.trim();
+  const lv=document.getElementById('nv-lv').value;
+  const fb=document.getElementById('add-fb');
+  if(!verb||!meaning){fb.className='add-fb no';fb.textContent='Please fill in the verb and meaning.';fb.style.display='block';setTimeout(()=>fb.style.display='none',3000);return;}
+  addedVerbs.push({v:verb,p:newPrep,m:meaning,lv,dual:false,ex:ex||'<span class="highlight">'+esc(verb)+'</span> '+(newPrep==='nada'?'':newPrep)+'…',tr:tr||'(no translation provided)'});
+  fb.className='add-fb ok';fb.textContent='"'+verb+'" added to custom set!';fb.style.display='block';setTimeout(()=>fb.style.display='none',3000);
+  document.getElementById('nv-verb').value='';document.getElementById('nv-m').value='';document.getElementById('nv-ex').value='';document.getElementById('nv-tr').value='';
+  renderSummary();
+}
+
+function saveSet(){
+  const data={sel:[...selIdx],added:addedVerbs};
+  savedCustom=data;
+  try{localStorage.setItem('spanishQuizCustom',JSON.stringify(data));}catch(e){}
+  showLand();
+}
+
+function startQuiz(lv){
+  if(lv==='custom'){pool=getCustomPool();if(!pool.length){alert('No verbs in custom set yet.');return;}}
+  else pool=lv==='all'?[...V]:V.filter(v=>v.lv===lv);
+  score=0;attempted=0;streak=0;
+  ['q-score','q-att','q-str'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('s-land').style.display='none';
+  document.getElementById('s-quiz').style.display='block';
+  document.getElementById('s-hdr').className='hdr hdr-student';
+  const labels={common:'Common verbs','less-common':'Less common verbs',all:'All verbs',custom:'Custom set'};
+  document.getElementById('hdr-title').textContent='Verbo + infinitivo';
+  document.getElementById('hdr-sub').textContent=labels[lv]+' — ¿qué preposición sigue?';
+  document.getElementById('q-fb').style.display='none';
+  document.getElementById('q-next').style.display='none';
+  document.getElementById('q-prog').style.width='0%';
+  queue=shuffle([...pool]);nextVerb();
+}
+
+function nextVerb(){
+  if(!queue.length)queue=shuffle([...pool]);
+  current=queue.pop();answered=false;
+  const card=document.getElementById('q-card');
+  if(current.dual){
+    const pts=current.sent.split('___');
+    card.innerHTML='<div class="verb-label">Lee la frase — ¿qué preposición hace falta?</div><div class="ctx-tag">context sentence</div><div class="ctx-sent">'+esc(pts[0])+'<span class="blank"></span>'+esc(pts[1]||'')+'</div><div class="ctx-en">'+esc(current.sentEn)+'</div><div class="ctx-verb">verb: <em>'+esc(current.v)+'</em></div>';
+  } else {
+    card.innerHTML='<div class="verb-label">verbo + ___ + infinitivo</div><div class="verb">'+esc(current.v)+'</div><div class="verb-meaning">'+esc(current.m)+'</div>';
+  }
+  document.getElementById('q-fb').style.display='none';
+  document.getElementById('q-next').style.display='none';
+  document.querySelectorAll('.choice-btn').forEach(b=>{b.disabled=false;b.classList.remove('reveal','incorrect');});
+  updateProg();
+}
+
+function answer(choice){
+  if(answered)return;answered=true;attempted++;
+  const ok=choice===current.p;
+  if(ok){score++;streak++;}else{streak=0;}
+  document.getElementById('q-score').textContent=score;
+  document.getElementById('q-att').textContent=attempted;
+  document.getElementById('q-str').textContent=streak;
+  document.querySelectorAll('.choice-btn').forEach(b=>{
+    b.disabled=true;const v=b.textContent.trim();
+    if(v===current.p)b.classList.add('reveal');
+    if(v===choice&&!ok)b.classList.add('incorrect');
+  });
+  const fb=document.getElementById('q-fb');
+  fb.style.display='block';fb.className='feedback '+(ok?'fb-ok':'fb-no');
+  const rt=ok?'&#10003; ¡Correcto!':'&#10007; No es correcto — la respuesta es '+(current.p==='nada'?'sin preposición':'"'+current.p+'"');
+  fb.innerHTML='<div class="fr '+(ok?'ok':'no')+'">'+rt+'</div><div class="fex">'+current.ex+'<br><em>'+current.tr+'</em></div>';
+  document.getElementById('q-next').style.display='block';updateProg();
+}
+
+function updateProg(){
+  document.getElementById('q-prog').style.width=Math.min(100,(attempted%pool.length)/pool.length*100)+'%';
+}
+
+showLand();
+try{const s=localStorage.getItem('spanishQuizCustom');if(s){const d=JSON.parse(s);selIdx=new Set(d.sel||[]);addedVerbs=d.added||[];savedCustom=d;refreshCustomBtn();}}catch(e){}
+</script>
+</body>
+</html>
