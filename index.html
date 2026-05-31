@@ -10,146 +10,141 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',system-ui,sans-serif;background:#f9f9f7;color:#1a1a18;min-height:100vh;}
-.page{max-width:840px;margin:0 auto;padding:3rem 1.5rem 4rem;}
-.hero{text-align:center;margin-bottom:3rem;}
-.hero h1{font-size:32px;font-weight:600;color:#1a1a18;margin-bottom:10px;}
-.hero p{font-size:16px;color:#6b6b68;max-width:480px;margin:0 auto;line-height:1.6;}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-@media(max-width:600px){.grid{grid-template-columns:1fr;}}
-.card{text-decoration:none;border-radius:16px;overflow:hidden;border:0.5px solid rgba(0,0,0,0.1);background:#fff;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;}
-.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1);}
-.card-flag{height:6px;display:flex;}
+.page{max-width:680px;margin:0 auto;padding:2.5rem 1.25rem 4rem;}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:2rem;}
+.hero h1{font-size:24px;font-weight:600;color:#1a1a18;margin-bottom:8px;}
+.hero p{font-size:14px;color:#6b6b68;max-width:480px;margin:0 auto;line-height:1.6;}
+
+/* Language grid — 4 across on desktop, 2x2 on mobile */
+.lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:2rem;}
+@media(max-width:540px){.lang-grid{grid-template-columns:repeat(2,1fr);}}
+
+.lang-card{text-decoration:none;background:#fff;border:0.5px solid rgba(0,0,0,.1);border-radius:12px;overflow:hidden;transition:transform .12s,box-shadow .12s;display:flex;flex-direction:column;}
+.lang-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1);}
+
+.card-flag{height:5px;display:flex;}
 .card-flag div{flex:1;}
-.card-header{padding:1.75rem 1.75rem 1.25rem;}
-.lang{font-size:28px;font-weight:600;color:#fff;margin-bottom:4px;}
-.quiz-name{font-size:14px;color:rgba(255,255,255,0.75);font-weight:400;}
-.card-fr .card-header{background:#1a365d;}
-.card-es .card-header{background:#991B1B;}
-.card-de .card-header{background:#1a1a2e;}
-.card-it .card-header{background:#009246;}
-.card-body{padding:1.25rem 1.75rem 1.75rem;flex:1;display:flex;flex-direction:column;gap:12px;}
-.card-desc{font-size:14px;color:#4b4b48;line-height:1.6;}
-.preps{display:flex;gap:8px;flex-wrap:wrap;}
-.prep-pill{font-size:13px;padding:4px 12px;border-radius:20px;font-weight:500;}
-.pill-a{background:#dbeafe;color:#1e40af;}
-.pill-de{background:#fee2e2;color:#991b1b;}
-.pill-rien,.pill-nada,.pill-nichts,.pill-niente{background:#dcfce7;color:#166534;}
-.pill-zu{background:#dbeafe;color:#1e40af;}
-.pill-umzu{background:#fee2e2;color:#991b1b;}
-.pill-di{background:#fee2e2;color:#991b1b;}
-.card-meta{font-size:12px;color:#9b9b98;margin-top:auto;}
-.start{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:500;transition:background .12s;}
-.card-fr .start{background:#1a365d;color:#fff;}.card-fr .start:hover{background:#1e4080;}
-.card-es .start{background:#991B1B;color:#fff;}.card-es .start:hover{background:#7f1717;}
-.card-de .start{background:#1a1a2e;color:#fff;}.card-de .start:hover{background:#2a2a4e;}
-.card-it .start{background:#009246;color:#fff;}.card-it .start:hover{background:#007a3a;}
-.saved-section{margin-top:2.5rem;}
-.saved-section h2{font-size:18px;font-weight:600;color:#1a1a18;margin-bottom:4px;}
-.saved-section p{font-size:14px;color:#6b6b68;margin-bottom:1.25rem;}
-.saved-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-@media(max-width:600px){.saved-cols{grid-template-columns:1fr;}}
-.saved-col-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.saved-col-flag{display:flex;gap:2px;}
-.saved-col-flag span{display:block;width:14px;height:14px;border-radius:2px;}
-.saved-col-label{font-size:13px;font-weight:600;color:#6b6b68;letter-spacing:.04em;text-transform:uppercase;}
-.saved-list{display:flex;flex-direction:column;gap:8px;}
-.saved-set-btn{width:100%;padding:.75rem 1rem;border-radius:10px;text-align:left;display:flex;align-items:center;gap:10px;border:1.5px solid #0d9488;background:#f0fdfa;transition:filter .12s;text-decoration:none;}
-.saved-set-btn:hover{filter:brightness(.97);}
-.ss-name{font-size:14px;font-weight:500;color:#0f766e;flex:1;}
-.ss-count{font-size:11px;padding:3px 9px;border-radius:20px;background:#ccfbf1;color:#0f766e;font-weight:500;white-space:nowrap;}
-.saved-empty{font-size:13px;color:#9b9b98;font-style:italic;padding:4px 0;}
-.saved-loading{font-size:13px;color:#9b9b98;font-style:italic;}
-.footer{text-align:center;margin-top:2.5rem;font-size:13px;color:#9b9b98;}
+.flag-v{display:flex;flex-direction:column;}
+.flag-h{display:flex;}
+
+.card-body{padding:12px 12px 14px;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;}
+.lang-name{font-size:15px;font-weight:600;color:#1a1a18;}
+.lang-native{font-size:11px;color:#6b6b68;}
+.preps{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-top:2px;}
+.prep-pill{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;}
+.pill-blue{background:#dbeafe;color:#1e40af;}
+.pill-red{background:#fee2e2;color:#991b1b;}
+.pill-green{background:#dcfce7;color:#166534;}
+.lang-meta{font-size:10px;color:#9b9b98;margin-top:2px;}
+
+/* Saved sets section */
+.saved-section{display:flex;flex-direction:column;gap:16px;}
+.saved-lang-block{}
+.saved-lang-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.saved-flag{display:flex;gap:2px;flex-shrink:0;}
+.saved-flag span{display:block;border-radius:1px;}
+.saved-lang-name{font-size:13px;font-weight:600;color:#4b4b48;letter-spacing:.03em;}
+.saved-list{display:flex;flex-direction:column;gap:6px;}
+.saved-set-link{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:8px;border:1px solid #0d9488;background:#f0fdfa;text-decoration:none;transition:filter .12s;}
+.saved-set-link:hover{filter:brightness(.97);}
+.ss-name{font-size:13px;font-weight:500;color:#0f766e;flex:1;}
+.ss-count{font-size:11px;padding:2px 8px;border-radius:20px;background:#ccfbf1;color:#0f766e;font-weight:500;white-space:nowrap;}
+
+.footer{text-align:center;margin-top:2.5rem;font-size:12px;color:#9b9b98;line-height:1.7;}
 </style>
 </head>
 <body>
 <div class="page">
+
   <div class="hero">
-    <h1>MFL Verb Practice</h1>
-    <p>Retrieval practice for verb and preposition patterns — choose a language to begin.</p>
-  </div>
-  <div class="grid">
-
-    <a href="french.html" class="card card-fr">
-      <div class="card-flag"><div style="background:#002395"></div><div style="background:#fff"></div><div style="background:#ED2939"></div></div>
-      <div class="card-header"><div class="lang">Français</div><div class="quiz-name">Verbe + infinitif</div></div>
-      <div class="card-body">
-        <p class="card-desc">Which preposition links each verb to the following infinitive? Choose correctly — or choose nothing if no preposition is needed.</p>
-        <div class="preps"><span class="prep-pill pill-a">à</span><span class="prep-pill pill-de">de</span><span class="prep-pill pill-rien">rien</span></div>
-        <p class="card-meta">108 verbs &nbsp;·&nbsp; 3 levels &nbsp;·&nbsp; context sentences &nbsp;·&nbsp; teacher panel</p>
-        <span class="start">Commencer →</span>
-      </div>
-    </a>
-
-    <a href="spanish.html" class="card card-es">
-      <div class="card-flag"><div style="background:#C60B1E"></div><div style="background:#FFC400"></div><div style="background:#C60B1E"></div></div>
-      <div class="card-header"><div class="lang">Español</div><div class="quiz-name">Verbo + infinitivo</div></div>
-      <div class="card-body">
-        <p class="card-desc">Which preposition links each verb to the following infinitive? Choose correctly — or choose nothing if no preposition is needed.</p>
-        <div class="preps"><span class="prep-pill pill-a">a</span><span class="prep-pill pill-de">de</span><span class="prep-pill pill-nada">nada</span></div>
-        <p class="card-meta">84 verbs &nbsp;·&nbsp; 3 levels &nbsp;·&nbsp; context sentences &nbsp;·&nbsp; teacher panel</p>
-        <span class="start">Empezar →</span>
-      </div>
-    </a>
-
-    <a href="german.html" class="card card-de">
-      <div class="card-flag"><div style="background:#000"></div><div style="background:#D00"></div><div style="background:#FFCE00"></div></div>
-      <div class="card-header"><div class="lang">Deutsch</div><div class="quiz-name">Verb + Infinitiv</div></div>
-      <div class="card-body">
-        <p class="card-desc">Which preposition links each verb to the following infinitive? Choose correctly — or choose nothing if no preposition is needed.</p>
-        <div class="preps"><span class="prep-pill pill-zu">zu</span><span class="prep-pill pill-umzu">um...zu</span><span class="prep-pill pill-nichts">nichts</span></div>
-        <p class="card-meta">51 verbs &nbsp;·&nbsp; 3 levels &nbsp;·&nbsp; teacher panel</p>
-        <span class="start">Beginnen →</span>
-      </div>
-    </a>
-
-    <a href="italian.html" class="card card-it">
-      <div class="card-flag"><div style="background:#009246"></div><div style="background:#fff"></div><div style="background:#CE2B37"></div></div>
-      <div class="card-header"><div class="lang">Italiano</div><div class="quiz-name">Verbo + infinito</div></div>
-      <div class="card-body">
-        <p class="card-desc">Which preposition links each verb to the following infinitive? Choose correctly — or choose nothing if no preposition is needed.</p>
-        <div class="preps"><span class="prep-pill pill-a">a</span><span class="prep-pill pill-di">di</span><span class="prep-pill pill-niente">niente</span></div>
-        <p class="card-meta">63 verbs &nbsp;·&nbsp; 3 levels &nbsp;·&nbsp; teacher panel</p>
-        <span class="start">Iniziare →</span>
-      </div>
-    </a>
-
+    <h1>MFL Verb + Preposition Practice</h1>
+    <p>Which preposition links each verb to the following infinitive? Choose the correct one — or choose nothing if no preposition is needed.</p>
   </div>
 
-  <div class="saved-section" id="saved-section" style="display:none">
-    <h2>Saved class sets</h2>
-    <p>Your teacher has published these custom sets — click any to start practising immediately.</p>
-    <div class="saved-cols">
-      <div>
-        <div class="saved-col-hdr">
-          <div class="saved-col-flag"><span style="background:#002395"></span><span style="background:#fff;border:0.5px solid #ddd"></span><span style="background:#ED2939"></span></div>
-          <span class="saved-col-label">French sets</span>
-        </div>
-        <div class="saved-list" id="fr-sets"><div class="saved-loading">Loading…</div></div>
+  <div class="lang-grid">
+
+    <!-- Deutsch -->
+    <a href="german.html" class="lang-card">
+      <div class="card-flag">
+        <div style="background:#000"></div>
+        <div style="background:#D00"></div>
+        <div style="background:#FFCE00"></div>
       </div>
-      <div>
-        <div class="saved-col-hdr">
-          <div class="saved-col-flag"><span style="background:#C60B1E"></span><span style="background:#FFC400"></span><span style="background:#C60B1E"></span></div>
-          <span class="saved-col-label">Spanish sets</span>
+      <div class="card-body">
+        <div class="lang-name">German</div>
+        <div class="lang-native">Deutsch</div>
+        <div class="preps">
+          <span class="prep-pill pill-blue">zu</span>
+          <span class="prep-pill pill-red">um...zu</span>
+          <span class="prep-pill pill-green">nichts</span>
         </div>
-        <div class="saved-list" id="es-sets"><div class="saved-loading">Loading…</div></div>
+        <div class="lang-meta">51 verbs · 3 levels</div>
       </div>
-      <div>
-        <div class="saved-col-hdr">
-          <div class="saved-col-flag"><span style="background:#000"></span><span style="background:#D00"></span><span style="background:#FFCE00"></span></div>
-          <span class="saved-col-label">German sets</span>
+    </a>
+
+    <!-- Español -->
+    <a href="spanish.html" class="lang-card">
+      <div class="card-flag">
+        <div style="background:#C60B1E"></div>
+        <div style="background:#FFC400"></div>
+        <div style="background:#C60B1E"></div>
+      </div>
+      <div class="card-body">
+        <div class="lang-name">Spanish</div>
+        <div class="lang-native">Español</div>
+        <div class="preps">
+          <span class="prep-pill pill-blue">a</span>
+          <span class="prep-pill pill-red">de</span>
+          <span class="prep-pill pill-green">nada</span>
         </div>
-        <div class="saved-list" id="de-sets"><div class="saved-loading">Loading…</div></div>
+        <div class="lang-meta">84 verbs · 3 levels</div>
       </div>
-      <div>
-        <div class="saved-col-hdr">
-          <div class="saved-col-flag"><span style="background:#009246"></span><span style="background:#fff;border:0.5px solid #ddd"></span><span style="background:#CE2B37"></span></div>
-          <span class="saved-col-label">Italian sets</span>
+    </a>
+
+    <!-- Français -->
+    <a href="french.html" class="lang-card">
+      <div class="card-flag">
+        <div style="background:#002395"></div>
+        <div style="background:#fff;outline:0.5px solid #eee"></div>
+        <div style="background:#ED2939"></div>
+      </div>
+      <div class="card-body">
+        <div class="lang-name">French</div>
+        <div class="lang-native">Français</div>
+        <div class="preps">
+          <span class="prep-pill pill-blue">à</span>
+          <span class="prep-pill pill-red">de</span>
+          <span class="prep-pill pill-green">rien</span>
         </div>
-        <div class="saved-list" id="it-sets"><div class="saved-loading">Loading…</div></div>
+        <div class="lang-meta">108 verbs · 3 levels</div>
       </div>
-    </div>
+    </a>
+
+    <!-- Italiano -->
+    <a href="italian.html" class="lang-card">
+      <div class="card-flag">
+        <div style="background:#009246"></div>
+        <div style="background:#fff;outline:0.5px solid #eee"></div>
+        <div style="background:#CE2B37"></div>
+      </div>
+      <div class="card-body">
+        <div class="lang-name">Italian</div>
+        <div class="lang-native">Italiano</div>
+        <div class="preps">
+          <span class="prep-pill pill-blue">a</span>
+          <span class="prep-pill pill-red">di</span>
+          <span class="prep-pill pill-green">niente</span>
+        </div>
+        <div class="lang-meta">63 verbs · 3 levels</div>
+      </div>
+    </a>
+
   </div>
+
+  <!-- Saved sets per language, only shown if sets exist -->
+  <div class="saved-section" id="saved-section"></div>
 
   <p class="footer">Use the teacher panel (&#128274;) inside each quiz to build and publish custom verb sets for your students.</p>
 </div>
@@ -173,37 +168,62 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function loadSets(lang) {
-  const q=query(collection(db,'customSets'),where('language','==',lang),orderBy('createdAt','desc'));
-  const snap=await getDocs(q);
-  const sets=[];
-  snap.forEach(d=>sets.push({id:d.id,...d.data()}));
+  const q = query(collection(db,'customSets'),where('language','==',lang),orderBy('createdAt','desc'));
+  const snap = await getDocs(q);
+  const sets = [];
+  snap.forEach(d => sets.push({id:d.id,...d.data()}));
   return sets;
 }
 
 function escH(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
 
-function renderList(id,sets,page){
-  const el=document.getElementById(id);
-  if(!sets.length){el.innerHTML='<div class="saved-empty">No sets published yet.</div>';return;}
-  el.innerHTML=sets.map(s=>{
-    const count=(s.sel?s.sel.length:0)+(s.added?s.added.length:0);
-    const idx=(s.sel||[]).join(',');
-    let url=page+'?set=custom';
-    if(idx)url+='&idx='+encodeURIComponent(idx);
-    if(s.added&&s.added.length>0){try{url+='&added='+btoa(unescape(encodeURIComponent(JSON.stringify(s.added))));}catch(e){}}
-    return `<a class="saved-set-btn" href="${escH(url)}"><span class="ss-name">${escH(s.name)}</span><span class="ss-count">${count} verb${count===1?'':'s'}</span></a>`;
-  }).join('');
+const LANGS = [
+  { key:'german',   label:'German',  page:'german.html',
+    flag:`<span style="width:10px;height:18px;background:#000"></span><span style="width:10px;height:18px;background:#D00"></span><span style="width:10px;height:18px;background:#FFCE00"></span>` },
+  { key:'spanish',  label:'Spanish', page:'spanish.html',
+    flag:`<span style="width:18px;height:6px;background:#C60B1E;display:block"></span><span style="width:18px;height:6px;background:#FFC400;display:block"></span><span style="width:18px;height:6px;background:#C60B1E;display:block"></span>` },
+  { key:'french',   label:'French',  page:'french.html',
+    flag:`<span style="width:10px;height:18px;background:#002395"></span><span style="width:10px;height:18px;background:#fff;outline:0.5px solid #ddd"></span><span style="width:10px;height:18px;background:#ED2939"></span>` },
+  { key:'italian',  label:'Italian', page:'italian.html',
+    flag:`<span style="width:10px;height:18px;background:#009246"></span><span style="width:10px;height:18px;background:#fff;outline:0.5px solid #ddd"></span><span style="width:10px;height:18px;background:#CE2B37"></span>` },
+];
+
+function buildSetURL(s, page) {
+  const idx = (s.sel||[]).join(',');
+  let url = page + '?set=custom';
+  if(idx) url += '&idx=' + encodeURIComponent(idx);
+  if(s.added&&s.added.length>0){try{url+='&added='+btoa(unescape(encodeURIComponent(JSON.stringify(s.added))));}catch(e){}}
+  return url;
 }
 
 try {
-  const [fr,es,de,it]=await Promise.all([loadSets('french'),loadSets('spanish'),loadSets('german'),loadSets('italian')]);
-  if(fr.length||es.length||de.length||it.length) document.getElementById('saved-section').style.display='block';
-  renderList('fr-sets',fr,'french.html');
-  renderList('es-sets',es,'spanish.html');
-  renderList('de-sets',de,'german.html');
-  renderList('it-sets',it,'italian.html');
+  const results = await Promise.all(LANGS.map(l => loadSets(l.key)));
+  const container = document.getElementById('saved-section');
+  let html = '';
+
+  LANGS.forEach((lang, i) => {
+    const sets = results[i];
+    if (!sets.length) return;
+    html += `<div class="saved-lang-block">
+      <div class="saved-lang-hdr">
+        <div class="saved-flag" style="display:flex;gap:2px">${lang.flag}</div>
+        <span class="saved-lang-name">${lang.label} — saved class sets</span>
+      </div>
+      <div class="saved-list">
+        ${sets.map(s => {
+          const count = (s.sel?s.sel.length:0)+(s.added?s.added.length:0);
+          return `<a class="saved-set-link" href="${escH(buildSetURL(s,lang.page))}">
+            <span class="ss-name">📋 ${escH(s.name)}</span>
+            <span class="ss-count">${count} verb${count===1?'':'s'}</span>
+          </a>`;
+        }).join('')}
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
 } catch(e) {
-  ['fr-sets','es-sets','de-sets','it-sets'].forEach(id=>document.getElementById(id).innerHTML='<div class="saved-empty">Could not load sets.</div>');
+  console.error('Firebase error:', e);
 }
 </script>
 </body>
