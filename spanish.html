@@ -131,10 +131,21 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f9f9f7;color:#1a1a18;}
 .chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:20px;background:#fff;border:0.5px solid rgba(0,0,0,.15);color:#1a1a18;}
 .chip button{background:none;border:none;cursor:pointer;color:#6b6b68;font-size:16px;padding:0;line-height:1;}
 .chip button:hover{color:#991b1b;}
-.save-btn{width:100%;padding:13px;border:1.5px solid #0d9488;border-radius:8px;background:#f0fdfa;color:#0f766e;font-size:15px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;}
+.empty-msg{font-size:13px;color:#6b6b68;font-style:italic;}
+
+/* Publish area */
+.publish-area{margin-top:1rem;background:#fff;border:0.5px solid rgba(0,0,0,.15);border-radius:8px;padding:1rem;}
+.publish-area label{display:block;font-size:13px;font-weight:500;color:#6b6b68;margin-bottom:6px;}
+.publish-area input{width:100%;padding:9px 12px;border:0.5px solid rgba(0,0,0,.2);border-radius:8px;font-size:14px;font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a18;margin-bottom:10px;}
+.publish-area input:focus{outline:none;border-color:#0d9488;}
+.pub-btns{display:flex;gap:8px;}
+.save-btn{flex:1;padding:13px;border:1.5px solid #0d9488;border-radius:8px;background:#f0fdfa;color:#0f766e;font-size:15px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;transition:background .12s;}
 .save-btn:hover:not(:disabled){background:#ccfbf1;}
 .save-btn:disabled{opacity:.5;cursor:default;}
-.empty-msg{font-size:13px;color:#6b6b68;font-style:italic;}
+.url-btn{flex:1;padding:13px;border:1.5px solid #991B1B;border-radius:8px;background:#fff1f2;color:#991B1B;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;transition:background .12s;}
+.url-btn:hover:not(:disabled){background:#ffe4e6;}
+.url-btn:disabled{opacity:.5;cursor:default;}
+
 .share-box{margin-top:1rem;background:#fff;border:0.5px solid rgba(0,0,0,.15);border-radius:8px;padding:1rem;display:none;}
 .share-label{font-size:13px;color:#6b6b68;margin-bottom:8px;line-height:1.5;}
 .share-row{display:flex;gap:8px;}
@@ -144,6 +155,20 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f9f9f7;color:#1a1a18;}
 .copy-btn.copied{background:#dcfce7;border-color:#16a34a;color:#166534;}
 .done-btn{width:100%;margin-top:10px;padding:12px;border:1.5px solid #991B1B;border-radius:8px;background:#fff1f2;color:#991B1B;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',system-ui,sans-serif;}
 .done-btn:hover{background:#ffe4e6;}
+.pub-status{font-size:13px;margin-top:8px;padding:8px 12px;border-radius:8px;display:none;}
+.pub-status.ok{background:#dcfce7;color:#166534;}
+.pub-status.no{background:#fee2e2;color:#991b1b;}
+.pub-status.loading{background:#fef3c7;color:#92400e;}
+
+/* Saved sets on landing */
+.saved-sets-section{margin-top:1rem;border-top:0.5px solid rgba(0,0,0,.1);padding-top:1rem;}
+.saved-sets-label{font-size:12px;font-weight:500;color:#6b6b68;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+.saved-sets-list{display:flex;flex-direction:column;gap:8px;}
+.saved-set-btn{width:100%;padding:.85rem 1.25rem;border-radius:12px;text-align:left;cursor:pointer;font-family:'Inter',system-ui,sans-serif;display:flex;align-items:center;gap:12px;border:1.5px solid #0d9488;background:#f0fdfa;transition:filter .12s;}
+.saved-set-btn:hover{filter:brightness(.97);}
+.saved-set-btn .ss-name{font-size:15px;font-weight:500;color:#0f766e;flex:1;}
+.saved-set-btn .ss-count{font-size:11px;padding:3px 10px;border-radius:20px;background:#ccfbf1;color:#0f766e;font-weight:500;white-space:nowrap;}
+.saved-sets-loading{font-size:13px;color:#6b6b68;font-style:italic;padding:4px 0;}
 </style>
 </head>
 <body>
@@ -184,6 +209,15 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f9f9f7;color:#1a1a18;}
       <span class="lbadge lbadge-custom">Custom</span>
     </button>
   </div>
+
+  <!-- Saved sets from Firebase -->
+  <div class="saved-sets-section" id="saved-sets-section" style="display:none">
+    <div class="saved-sets-label">Saved class sets</div>
+    <div class="saved-sets-list" id="saved-sets-list">
+      <div class="saved-sets-loading">Loading sets…</div>
+    </div>
+  </div>
+
   <a class="home-link" href="index.html">← Back to language menu</a>
   <button class="teacher-link" onclick="showLogin()">&#128274; Teacher panel</button>
 </div>
@@ -249,7 +283,18 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f9f9f7;color:#1a1a18;}
       <button class="t-mini-btn" onclick="clearAll()">Clear all</button>
     </div>
     <div class="sum-chips" id="sum-chips"><span class="empty-msg">No verbs selected yet.</span></div>
-    <button class="save-btn" id="save-btn" onclick="saveSet()" disabled>Save &amp; get shareable link</button>
+
+    <!-- Publish area -->
+    <div class="publish-area">
+      <label>Set name (shown as a button on the landing page)</label>
+      <input type="text" id="set-name-inp" placeholder="e.g. Year 11 — a verbs" maxlength="60">
+      <div class="pub-btns">
+        <button class="save-btn" id="save-btn" onclick="publishSet()" disabled>&#127381; Publish to landing page</button>
+        <button class="url-btn" id="url-btn" onclick="getShareURL()" disabled>&#128279; Shareable URL only</button>
+      </div>
+      <div class="pub-status" id="pub-status"></div>
+    </div>
+
     <div class="share-box" id="share-box">
       <div class="share-label">&#128279; Copy this link and share it with your students — when they click it, your custom set loads automatically on their device:</div>
       <div class="share-row">
@@ -279,6 +324,99 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f9f9f7;color:#1a1a18;}
   <div class="progress"><div class="progress-fill" id="q-prog" style="width:0%"></div></div>
 </div>
 </div>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAxD6rDHTxpMZBBUFSDYPwZg2-OyYnfc5Y",
+  authDomain: "verbsplusprepositions.firebaseapp.com",
+  projectId: "verbsplusprepositions",
+  storageBucket: "verbsplusprepositions.firebasestorage.app",
+  messagingSenderId: "200954282587",
+  appId: "1:200954282587:web:4fd927bd1039e88f35f57e",
+  measurementId: "G-RYVM9ZEJ90"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window._db = db;
+window._addDoc = addDoc;
+window._collection = collection;
+
+loadSavedSets();
+
+async function loadSavedSets() {
+  try {
+    const q = query(
+      collection(db, 'customSets'),
+      where('language', '==', 'spanish'),
+      orderBy('createdAt', 'desc')
+    );
+    const snap = await getDocs(q);
+    const sets = [];
+    snap.forEach(doc => sets.push({ id: doc.id, ...doc.data() }));
+    window._savedSets = sets;
+    renderSavedSets(sets);
+  } catch (e) {
+    console.error('Failed to load saved sets:', e);
+    renderSavedSets([]);
+  }
+}
+
+function renderSavedSets(sets) {
+  const section = document.getElementById('saved-sets-section');
+  const list = document.getElementById('saved-sets-list');
+  if (!sets.length) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  list.innerHTML = sets.map(s => {
+    const count = (s.sel ? s.sel.length : 0) + (s.added ? s.added.length : 0);
+    return `<button class="saved-set-btn" onclick="loadSavedSet('${s.id}')">
+      <span class="ss-name">${escHTML(s.name)}</span>
+      <span class="ss-count">${count} verb${count===1?'':'s'}</span>
+    </button>`;
+  }).join('');
+}
+
+function escHTML(s) {
+  return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : '';
+}
+
+window.loadSavedSet = function(id) {
+  const sets = window._savedSets || [];
+  const s = sets.find(x => x.id === id);
+  if (!s) return;
+  selIdx = new Set((s.sel || []).map(Number));
+  addedVerbs = s.added || [];
+  savedCustom = { sel: [...selIdx], added: addedVerbs };
+  refreshCustomBtn();
+  startQuiz('custom');
+};
+
+window._publishToFirestore = async function(name, data) {
+  const st = document.getElementById('pub-status');
+  st.className = 'pub-status loading'; st.textContent = 'Publishing…'; st.style.display = 'block';
+  try {
+    await addDoc(collection(db, 'customSets'), {
+      language: 'spanish',
+      name: name,
+      sel: data.sel,
+      added: data.added,
+      createdAt: serverTimestamp()
+    });
+    st.className = 'pub-status ok';
+    st.textContent = '✓ Published! "' + name + '" will appear on the landing page for all students.';
+    loadSavedSets();
+  } catch (e) {
+    st.className = 'pub-status no';
+    st.textContent = '✗ Could not publish: ' + e.message;
+  }
+};
+</script>
 
 <script>
 const PASS='teacher2024';
@@ -475,7 +613,9 @@ function clearAll(){selIdx.clear();addedVerbs=[];renderVList();renderSummary();}
 function renderSummary(){
   const p=getCustomPool();
   document.getElementById('sum-count').textContent=p.length+' verb'+(p.length===1?'':'s')+' in custom set';
-  document.getElementById('save-btn').disabled=p.length===0;
+  const hasVerbs=p.length>0;
+  document.getElementById('save-btn').disabled=!hasVerbs;
+  document.getElementById('url-btn').disabled=!hasVerbs;
   const chips=p.map((v,i)=>`<span class="chip"><span class="pbadge ${v.p==='a'?'pb-a':v.p==='de'?'pb-de':'pb-n'}" style="font-size:10px;padding:1px 6px">${v.p}</span>${esc(v.v)}<button onclick="removeFromSet(${i})" title="Remove">&#x2715;</button></span>`).join('');
   document.getElementById('sum-chips').innerHTML=chips||'<span class="empty-msg">No verbs selected yet.</span>';
 }
@@ -507,14 +647,31 @@ function addVerb(){
   renderSummary();
 }
 
-function saveSet(){
+function publishSet(){
+  const name=document.getElementById('set-name-inp').value.trim();
+  const st=document.getElementById('pub-status');
+  if(!name){
+    st.className='pub-status no';st.textContent='Please enter a name for this set.';st.style.display='block';
+    document.getElementById('set-name-inp').focus();
+    return;
+  }
+  const data={sel:[...selIdx],added:addedVerbs};
+  savedCustom=data;
+  try{localStorage.setItem('spanishQuizCustom',JSON.stringify(data));}catch(e){}
+  if(window._publishToFirestore){
+    window._publishToFirestore(name,data);
+  } else {
+    st.className='pub-status no';st.textContent='Firebase not ready yet — please try again in a moment.';st.style.display='block';
+  }
+}
+
+function getShareURL(){
   const data={sel:[...selIdx],added:addedVerbs};
   savedCustom=data;
   try{localStorage.setItem('spanishQuizCustom',JSON.stringify(data));}catch(e){}
   const url=generateShareURL();
   document.getElementById('share-url-inp').value=url;
   document.getElementById('share-box').style.display='block';
-  document.getElementById('save-btn').style.display='none';
 }
 
 function generateShareURL(){
